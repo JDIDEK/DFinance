@@ -34,9 +34,9 @@
                         <span class="text-lamborghini-orange">⚡</span>
                         <span class="text-white font-semibold" id="live-time"></span>
                     </div>
-                    <button onclick="startTutorial()" class="p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2" title="Démarrer le tour guidé">
+                    <button onclick="startTutorial()" class="p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2" title="Start guided tour">
                         <span class="text-lg">🎓</span>
-                        <span class="hidden sm:inline text-sm font-semibold">Tour guidé</span>
+                        <span class="hidden sm:inline text-sm font-semibold">Guided Tour</span>
                     </button>
                 </div>
             </div>
@@ -121,7 +121,10 @@
                         <div>
                             <label for="description" class="block text-lamborghini-orange text-sm font-semibold mb-2 uppercase tracking-wide">Description</label>
                             <div class="relative">
-                                <input type="text" id="description" name="description" class="w-full bg-gray-700 bg-opacity-80 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-lamborghini-orange focus:ring-2 focus:ring-lamborghini-orange focus:ring-opacity-50 transition-all backdrop-blur-sm relative z-10" required placeholder="Ex: Courses, Salaire, Restaurant...">
+                                <div class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm font-medium pointer-events-none z-0">
+                                    Describe your transaction...
+                                </div>
+                                <input type="text" id="description" name="description" class="w-full bg-gray-700 bg-opacity-80 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-lamborghini-orange focus:ring-2 focus:ring-lamborghini-orange focus:ring-opacity-50 transition-all backdrop-blur-sm relative z-10" required placeholder="Ex: Groceries, Salary, Restaurant...">
                             </div>
                         </div>
 
@@ -129,6 +132,9 @@
                             <div>
                                 <label for="amount" class="block text-lamborghini-orange text-sm font-semibold mb-2 uppercase tracking-wide">Amount</label>
                                 <div class="relative">
+                                    <div class="absolute inset-0 flex items-center justify-center text-gray-500 text-sm font-medium pointer-events-none z-0">
+                                        Amount in euros...
+                                    </div>
                                     <input type="number" id="amount" name="amount" step="0.01" min="0.01" class="w-full bg-gray-700 bg-opacity-80 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-lamborghini-orange focus:ring-2 focus:ring-lamborghini-orange focus:ring-opacity-50 transition-all backdrop-blur-sm relative z-10" required placeholder="0.00">
                                 </div>
                             </div>

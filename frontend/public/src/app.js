@@ -43,92 +43,92 @@ document.addEventListener('DOMContentLoaded', () => {
     const tutorialSteps = [
         {
             target: '#live-time',
-            title: '⚡ Temps en direct',
-            content: 'L\'heure se met à jour en temps réel. Parfait pour suivre le temps que vous passez à gérer vos finances !',
+            title: '⚡ Live Time',
+            content: 'The time updates in real-time. Perfect for tracking how much time you spend managing your finances!',
             position: 'bottom'
         },
         {
             target: '#total-income',
-            title: '💰 Revenus totaux',
-            content: 'Ici s\'affichent tous vos revenus cumulés. Cette valeur se met à jour automatiquement à chaque nouvelle transaction.',
+            title: '💰 Total Income',
+            content: 'Here you can see all your cumulative income. This value updates automatically with each new transaction.',
             position: 'bottom'
         },
         {
             target: '#total-expenses',
-            title: '💸 Dépenses totales',
-            content: 'Le total de toutes vos dépenses. Gardez un œil dessus pour contrôler votre budget !',
+            title: '💸 Total Expenses',
+            content: 'The total of all your expenses. Keep an eye on this to control your budget!',
             position: 'bottom'
         },
         {
             target: '#net-balance',
-            title: '⚖️ Solde net',
-            content: 'Votre solde net (revenus - dépenses). En vert si positif, en rouge si négatif.',
+            title: '⚖️ Net Balance',
+            content: 'Your net balance (income - expenses). Green if positive, red if negative.',
             position: 'bottom'
         },
         {
             target: '#month-savings',
-            title: '📈 Épargne du mois',
-            content: 'Combien vous avez économisé ce mois-ci. L\'objectif est de garder ce chiffre positif !',
+            title: '📈 Monthly Savings',
+            content: 'How much you saved this month. The goal is to keep this number positive!',
             position: 'bottom'
         },
         {
             target: '#transaction-form',
-            title: '⚡ Ajouter une transaction',
-            content: 'Formulaire principal pour ajouter vos revenus et dépenses. Remplissez simplement les champs et cliquez sur "ADD TRANSACTION".',
+            title: '⚡ Add Transaction',
+            content: 'Main form to add your income and expenses. Simply fill in the fields and click "ADD TRANSACTION".',
             position: 'right'
         },
         {
             target: '#type',
-            title: '🔄 Type de transaction',
-            content: 'Choisissez entre "Dépense" ou "Revenu". Les catégories changeront automatiquement selon votre choix.',
+            title: '🔄 Transaction Type',
+            content: 'Choose between "Expense" or "Income". Categories will change automatically based on your choice.',
             position: 'right'
         },
         {
             target: '#category',
-            title: '📂 Catégories',
-            content: 'Sélectionnez la catégorie appropriée. Chaque catégorie a son icône pour faciliter l\'identification.',
+            title: '📂 Categories',
+            content: 'Select the appropriate category. Each category has its icon for easy identification.',
             position: 'right'
         },
         {
             target: '#payment_method',
-            title: '💳 Méthode de paiement',
-            content: 'Indiquez comment vous avez payé : espèces, carte, virement, ou même crypto !',
+            title: '💳 Payment Method',
+            content: 'Indicate how you paid: cash, card, transfer, or even crypto!',
             position: 'right'
         },
         {
             target: '#goals-list',
-            title: '🎯 Objectifs financiers',
-            content: 'Définissez et suivez vos objectifs d\'épargne. Ajoutez des montants pour voir votre progression !',
+            title: '🎯 Financial Goals',
+            content: 'Set and track your savings goals. Add amounts to see your progress!',
             position: 'right'
         },
         {
             target: '#add-goal-btn',
-            title: '➕ Ajouter un objectif',
-            content: 'Cliquez ici pour créer un nouvel objectif financier avec un montant cible et une date limite.',
+            title: '➕ Add Goal',
+            content: 'Click here to create a new financial goal with a target amount and deadline.',
             position: 'left'
         },
         {
             target: '#category-chart',
-            title: '🍩 Graphique des catégories',
-            content: 'Visualisez la répartition de vos dépenses par catégorie. Parfait pour identifier où va votre argent !',
+            title: '🍩 Category Chart',
+            content: 'Visualize the breakdown of your expenses by category. Perfect for identifying where your money goes!',
             position: 'top'
         },
         {
             target: '#monthly-chart',
-            title: '📊 Tendances mensuelles',
-            content: 'Suivez l\'évolution de vos revenus et dépenses sur les 6 derniers mois. Idéal pour détecter les tendances.',
+            title: '📊 Monthly Trends',
+            content: 'Track the evolution of your income and expenses over the last 6 months. Ideal for detecting trends.',
             position: 'top'
         },
         {
             target: '#filter-all',
-            title: '🔍 Filtres de transactions',
-            content: 'Filtrez vos transactions par type : toutes, revenus seulement, ou dépenses seulement.',
+            title: '🔍 Transaction Filters',
+            content: 'Filter your transactions by type: all, income only, or expenses only.',
             position: 'left'
         },
         {
             target: '#transaction-list',
-            title: '📋 Liste des transactions',
-            content: 'Toutes vos transactions récentes s\'affichent ici. Vous pouvez les modifier ou les supprimer avec les boutons à droite.',
+            title: '📋 Transaction List',
+            content: 'All your recent transactions are displayed here. You can edit or delete them with the buttons on the right.',
             position: 'top'
         }
     ];
@@ -552,12 +552,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="flex space-x-1">
                                 <button onclick="editGoal(${goal.id})" 
                                         class="p-1 bg-blue-500 bg-opacity-20 text-blue-400 rounded hover:bg-opacity-30 transition-all text-xs"
-                                        title="Modifier l'objectif">
+                                        title="Edit Goal">
                                     ✏️
                                 </button>
                                 <button onclick="deleteGoal(${goal.id})" 
                                         class="p-1 bg-red-500 bg-opacity-20 text-red-400 rounded hover:bg-opacity-30 transition-all text-xs"
-                                        title="Supprimer l'objectif">
+                                        title="Delete Goal">
                                     🗑️
                                 </button>
                             </div>
@@ -568,16 +568,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="flex justify-between text-sm text-gray-400">
                         <span>${formatCurrency(goal.current_amount)} / ${formatCurrency(goal.target_amount)}</span>
-                        ${daysLeft !== null ? `<span>${daysLeft > 0 ? `${daysLeft} jours restants` : 'En retard'}</span>` : ''}
+                        ${daysLeft !== null ? `<span>${daysLeft > 0 ? `${daysLeft} days left` : 'Overdue'}</span>` : ''}
                     </div>
                     ${!isCompleted ? `
                         <button onclick="addToGoal(${goal.id})" 
                                 class="mt-2 w-full text-xs bg-lamborghini-orange bg-opacity-20 text-lamborghini-orange py-1 rounded hover:bg-opacity-30 transition-all">
-                            + Ajouter des fonds
+                            + Add Funds
                         </button>
                     ` : `
                         <div class="mt-2 text-center">
-                            <span class="text-green-400 text-sm font-semibold">🏆 Objectif atteint !</span>
+                            <span class="text-green-400 text-sm font-semibold">🏆 Goal Achieved!</span>
                         </div>
                     `}
                 </div>
@@ -1000,16 +1000,16 @@ document.addEventListener('DOMContentLoaded', () => {
         confirmModal.innerHTML = `
             <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border-2 border-red-500 shadow-2xl max-w-md mx-4 text-center">
                 <div class="text-5xl mb-4">🗑️</div>
-                <h3 class="text-xl font-bold text-white mb-3">Supprimer la transaction</h3>
+                <h3 class="text-xl font-bold text-white mb-3">Delete Transaction</h3>
                 <p class="text-gray-300 mb-6 leading-relaxed">
-                    Êtes-vous sûr de vouloir supprimer cette transaction ? Cette action est irréversible.
+                    Are you sure you want to delete this transaction? This action is irreversible.
                 </p>
                 <div class="flex space-x-4 justify-center">
                     <button id="confirm-delete" class="px-6 py-3 bg-red-500 hover:bg-red-400 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border border-red-400">
-                        Oui, supprimer
+                        Yes, Delete
                     </button>
                     <button id="cancel-delete" class="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-lg font-semibold transition-all duration-300 border border-gray-500">
-                        Annuler
+                        Cancel
                     </button>
                 </div>
             </div>
@@ -1030,11 +1030,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     state.transactions = state.transactions.filter(t => t.id !== id);
                     renderAll();
-                    showNotification('Transaction supprimée avec succès', 'success');
+                    showNotification('Transaction deleted successfully', 'success');
                     
                 } catch (error) {
                     console.error('Error deleting transaction:', error);
-                    showNotification('Erreur lors de la suppression. Réessayez.', 'error');
+                    showNotification('Error during deletion. Please try again.', 'error');
                 }
                 resolve();
             });
@@ -1065,12 +1065,12 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border-2 border-orange-500 shadow-2xl max-w-md mx-4 w-full">
                 <div class="text-center mb-6">
                     <div class="text-4xl mb-2">💰</div>
-                    <h3 class="text-xl font-bold text-white">Ajouter des fonds</h3>
+                    <h3 class="text-xl font-bold text-white">Add Funds</h3>
                     <p class="text-gray-400 text-sm mt-2">${goal.title}</p>
                 </div>
                 <form id="add-funds-form" class="space-y-4">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">Montant à ajouter</label>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Amount to Add</label>
                         <div class="relative">
                             <input type="number" id="funds-amount" step="0.01" min="0.01" 
                             class="w-full p-3 bg-gray-700 bg-opacity-80 border border-gray-600 rounded-lg text-white focus:border-orange-500 focus:outline-none relative z-10 backdrop-blur-sm" 
@@ -1079,10 +1079,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="flex space-x-4 pt-4">
                         <button type="submit" class="flex-1 bg-lamborghini-orange hover:bg-lamborghini-dark-orange text-white py-3 rounded-lg font-semibold transition-all duration-300 border border-lamborghini-orange">
-                            Ajouter
+                            Add
                         </button>
                         <button type="button" id="cancel-add-funds" class="flex-1 bg-gray-600 hover:bg-gray-500 text-white py-3 rounded-lg font-semibold transition-all border border-gray-500">
-                            Annuler
+                            Cancel
                         </button>
                     </div>
                 </form>
@@ -1098,7 +1098,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const amount = parseFloat(document.getElementById('funds-amount').value);
             if (!amount || amount <= 0) {
-                showNotification('Veuillez entrer un montant valide', 'error');
+                showNotification('Please enter a valid amount', 'error');
                 return;
             }
 
@@ -1117,11 +1117,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 addFundsModal.remove();
                 renderGoals();
-                showNotification(`${formatCurrency(amount)} ajouté à l'objectif`, 'success');
+                showNotification(`${formatCurrency(amount)} added to goal`, 'success');
                 
             } catch (error) {
                 console.error('Error updating goal:', error);
-                showNotification('Erreur lors de la mise à jour', 'error');
+                showNotification('Error during update', 'error');
             }
         });
 
@@ -1158,30 +1158,30 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border-2 border-orange-500 shadow-2xl max-w-md mx-4 w-full">
                 <div class="text-center mb-6">
                     <div class="text-4xl mb-2">🎯</div>
-                    <h3 class="text-xl font-bold text-white">Modifier l'objectif</h3>
+                    <h3 class="text-xl font-bold text-white">Edit Goal</h3>
                 </div>
                 <form id="edit-goal-form" class="space-y-4">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">Titre</label>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Title</label>
                         <input type="text" id="edit-goal-title" value="${goal.title}" 
                                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:border-orange-500 focus:outline-none">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">Montant cible</label>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Target Amount</label>
                         <input type="number" id="edit-goal-amount" value="${goal.target_amount}" step="0.01" min="0"
                                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:border-orange-500 focus:outline-none">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">Date limite</label>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Deadline</label>
                         <input type="date" id="edit-goal-date" value="${goal.target_date ? goal.target_date.split('T')[0] : ''}"
                                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:border-orange-500 focus:outline-none">
                     </div>
                     <div class="flex space-x-4 pt-4">
                         <button type="submit" class="flex-1 bg-lamborghini-orange hover:bg-lamborghini-dark-orange text-white py-3 rounded-lg font-semibold transition-all duration-300 border border-lamborghini-orange">
-                            Sauvegarder
+                            Save
                         </button>
                         <button type="button" id="cancel-edit-goal" class="flex-1 bg-gray-600 hover:bg-gray-500 text-white py-3 rounded-lg font-semibold transition-all border border-gray-500">
-                            Annuler
+                            Cancel
                         </button>
                     </div>
                 </form>
@@ -1216,11 +1216,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 editModal.remove();
                 renderGoals();
-                showNotification('Objectif modifié avec succès !', 'success');
+                showNotification('Goal modified successfully!', 'success');
                 
             } catch (error) {
                 console.error('Error updating goal:', error);
-                showNotification('Erreur lors de la modification', 'error');
+                showNotification('Error during modification', 'error');
             }
         });
 
@@ -1243,17 +1243,17 @@ document.addEventListener('DOMContentLoaded', () => {
         confirmModal.innerHTML = `
             <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border-2 border-red-500 shadow-2xl max-w-md mx-4 text-center">
                 <div class="text-5xl mb-4">🗑️</div>
-                <h3 class="text-xl font-bold text-white mb-3">Supprimer l'objectif</h3>
+                <h3 class="text-xl font-bold text-white mb-3">Delete Goal</h3>
                 <p class="text-gray-300 mb-2 font-semibold">"${goal.title}"</p>
                 <p class="text-gray-400 mb-6 leading-relaxed text-sm">
-                    Êtes-vous sûr de vouloir supprimer cet objectif ? Cette action est irréversible.
+                    Are you sure you want to delete this goal? This action is irreversible.
                 </p>
                 <div class="flex space-x-4 justify-center">
                     <button id="confirm-delete-goal" class="px-6 py-3 bg-red-500 hover:bg-red-400 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border border-red-400">
-                        Oui, supprimer
+                        Yes, Delete
                     </button>
                     <button id="cancel-delete-goal" class="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-lg font-semibold transition-all duration-300 border border-gray-500">
-                        Annuler
+                        Cancel
                     </button>
                 </div>
             </div>
@@ -1273,11 +1273,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 state.goals = state.goals.filter(g => g.id !== goalId);
                 renderGoals();
-                showNotification('Objectif supprimé avec succès', 'success');
+                showNotification('Goal deleted successfully', 'success');
                 
             } catch (error) {
                 console.error('Error deleting goal:', error);
-                showNotification('Erreur lors de la suppression', 'error');
+                showNotification('Error during deletion', 'error');
             }
         });
         
@@ -1301,7 +1301,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showTutorialStep(currentTutorialStep);
         
         // Show tutorial start notification
-        showNotification('🎓 Bienvenue dans le tour guidé de DFinance !', 'info');
+        showNotification('🎓 Welcome to the DFinance guided tour!', 'info');
     }
 
     function createTutorialOverlay() {
@@ -1325,13 +1325,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div id="tutorial-progress" class="text-xs text-gray-400"></div>
                     <div class="flex space-x-2">
                         <button id="tutorial-skip" class="px-3 py-1 bg-gray-600 hover:bg-gray-500 text-white rounded-lg text-sm transition-colors">
-                            Passer
+                            Skip
                         </button>
                         <button id="tutorial-prev" class="px-3 py-1 bg-orange-600 hover:bg-orange-500 text-white rounded-lg text-sm transition-colors">
-                            Précédent ←
+                            ← Previous
                         </button>
                         <button id="tutorial-next" class="px-4 py-1 bg-lamborghini-orange hover:bg-lamborghini-dark-orange text-white rounded-lg text-sm font-semibold transition-colors">
-                            Suivant →
+                            Next →
                         </button>
                     </div>
                 </div>
@@ -1358,7 +1358,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update tooltip content
         document.getElementById('tutorial-title').textContent = step.title;
         document.getElementById('tutorial-text').textContent = step.content;
-        document.getElementById('tutorial-progress').textContent = `Étape ${stepIndex + 1} sur ${tutorialSteps.length}`;
+        document.getElementById('tutorial-progress').textContent = `Step ${stepIndex + 1} of ${tutorialSteps.length}`;
         
         // Update button states
         const prevBtn = document.getElementById('tutorial-prev');
@@ -1367,11 +1367,11 @@ document.addEventListener('DOMContentLoaded', () => {
         prevBtn.style.display = stepIndex === 0 ? 'none' : 'block';
         
         if (stepIndex === tutorialSteps.length - 1) {
-            nextBtn.textContent = 'Terminer 🎉';
+            nextBtn.textContent = 'Finish 🎉';
             nextBtn.classList.add('bg-green-500', 'hover:bg-green-400');
             nextBtn.classList.remove('bg-lamborghini-orange', 'hover:bg-lamborghini-dark-orange');
         } else {
-            nextBtn.textContent = 'Suivant →';
+            nextBtn.textContent = 'Next →';
             nextBtn.classList.remove('bg-green-500', 'hover:bg-green-400');
             nextBtn.classList.add('bg-lamborghini-orange', 'hover:bg-lamborghini-dark-orange');
         }
