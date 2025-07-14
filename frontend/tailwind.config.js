@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'lamborghini': {
+        'primary': {
           'orange': '#FF6B00',
           'dark-orange': '#E55A00',
           'black': '#000000',

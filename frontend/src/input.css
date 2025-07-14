@@ -2,15 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Lamborghini-inspired styles */
+/* Custom modern styles */
 @layer base {
   :root {
-    --lamborghini-orange: #FF6B00;
-    --lamborghini-dark-orange: #E55A00;
-    --lamborghini-black: #000000;
-    --lamborghini-dark-gray: #1a1a1a;
-    --lamborghini-gray: #2d2d2d;
-    --lamborghini-light-gray: #404040;
+    #ff6b00: #FF6B00;
+    #e55a00: #E55A00;
+    #000000: #000000;
+    #1a1a1a: #1a1a1a;
+    #2d2d2d: #2d2d2d;
+    #404040: #404040;
     --accent-green: #00FF88;
     --accent-red: #FF3366;
     --accent-blue: #00AAFF;

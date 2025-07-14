@@ -1,5 +1,5 @@
-// DFinance Pro - Advanced Personal Finance Tracker
-// Lamborghini-inspired design with enhanced functionality
+// DFinance - Advanced Personal Finance Tracker
+// Modern design with enhanced functionality
 
 document.addEventListener('DOMContentLoaded', () => {
     const API_URL = 'http://localhost:3001';
@@ -539,12 +539,12 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.goalsList.innerHTML = state.goals.map(goal => {
             const progress = Math.min((goal.current_amount / goal.target_amount) * 100, 100);
             const isCompleted = progress >= 100;
-            const statusColor = isCompleted ? 'text-green-400' : progress > 50 ? 'text-lamborghini-orange' : 'text-blue-400';
+            const statusColor = isCompleted ? 'text-green-400' : progress > 50 ? 'text-orange-500' : 'text-blue-400';
             
             const daysLeft = goal.target_date ? Math.ceil((new Date(goal.target_date) - new Date()) / (1000 * 60 * 60 * 24)) : null;
             
             return `
-                <div class="bg-gray-700 rounded-lg p-4 border border-gray-600 hover:border-lamborghini-orange transition-all">
+                <div class="bg-gray-700 rounded-lg p-4 border border-gray-600 hover:border-orange-500 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <h4 class="font-semibold text-white">${goal.title}</h4>
                         <div class="flex items-center space-x-2">
@@ -572,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     ${!isCompleted ? `
                         <button onclick="addToGoal(${goal.id})" 
-                                class="mt-2 w-full text-xs bg-lamborghini-orange bg-opacity-20 text-lamborghini-orange py-1 rounded hover:bg-opacity-30 transition-all">
+                                class="mt-2 w-full text-xs bg-orange-500 bg-opacity-20 text-orange-500 py-1 rounded hover:bg-opacity-30 transition-all">
                             + Add Funds
                         </button>
                     ` : `
@@ -844,12 +844,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Update filter buttons
         document.querySelectorAll('[id^="filter-"]').forEach(btn => {
-            btn.classList.remove('bg-lamborghini-orange', 'bg-opacity-30', 'text-lamborghini-orange');
+            btn.classList.remove('bg-orange-500', 'bg-opacity-30', 'text-orange-500');
             btn.classList.add('bg-opacity-20');
         });
         
         const activeBtn = document.getElementById(`filter-${type}`);
-        activeBtn.classList.add('bg-lamborghini-orange', 'bg-opacity-30', 'text-lamborghini-orange');
+        activeBtn.classList.add('bg-orange-500', 'bg-opacity-30', 'text-orange-500');
         
         renderTransactionList();
     }
@@ -898,7 +898,7 @@ document.addEventListener('DOMContentLoaded', () => {
         notification.className = `p-4 rounded-xl shadow-2xl transform transition-all duration-500 border-2 ${
             type === 'success' ? 'bg-gradient-to-r from-green-600 to-green-500 border-green-400' :
             type === 'error' ? 'bg-gradient-to-r from-red-600 to-red-500 border-red-400' :
-            type === 'warning' ? 'bg-gradient-to-r from-lamborghini-dark-orange to-lamborghini-orange border-lamborghini-orange' :
+            type === 'warning' ? 'bg-gradient-to-r from-orange-600 to-orange-500 border-orange-500' :
             'bg-gradient-to-r from-blue-600 to-blue-500 border-blue-400'
         } text-white`;
         
@@ -917,7 +917,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
                     type === 'success' ? 'bg-green-400 bg-opacity-30' :
                     type === 'error' ? 'bg-red-400 bg-opacity-30' :
-                    type === 'warning' ? 'bg-lamborghini-orange bg-opacity-30' :
+                    type === 'warning' ? 'bg-orange-500 bg-opacity-30' :
                     'bg-blue-400 bg-opacity-30'
                 }">
                     <span class="text-lg">
@@ -1078,7 +1078,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                     <div class="flex space-x-4 pt-4">
-                        <button type="submit" class="flex-1 bg-lamborghini-orange hover:bg-lamborghini-dark-orange text-white py-3 rounded-lg font-semibold transition-all duration-300 border border-lamborghini-orange">
+                        <button type="submit" class="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-all duration-300 border border-orange-500">
                             Add
                         </button>
                         <button type="button" id="cancel-add-funds" class="flex-1 bg-gray-600 hover:bg-gray-500 text-white py-3 rounded-lg font-semibold transition-all border border-gray-500">
@@ -1177,7 +1177,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:border-orange-500 focus:outline-none">
                     </div>
                     <div class="flex space-x-4 pt-4">
-                        <button type="submit" class="flex-1 bg-lamborghini-orange hover:bg-lamborghini-dark-orange text-white py-3 rounded-lg font-semibold transition-all duration-300 border border-lamborghini-orange">
+                        <button type="submit" class="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition-all duration-300 border border-orange-500">
                             Save
                         </button>
                         <button type="button" id="cancel-edit-goal" class="flex-1 bg-gray-600 hover:bg-gray-500 text-white py-3 rounded-lg font-semibold transition-all border border-gray-500">
@@ -1330,7 +1330,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <button id="tutorial-prev" class="px-3 py-1 bg-orange-600 hover:bg-orange-500 text-white rounded-lg text-sm transition-colors">
                             ← Previous
                         </button>
-                        <button id="tutorial-next" class="px-4 py-1 bg-lamborghini-orange hover:bg-lamborghini-dark-orange text-white rounded-lg text-sm font-semibold transition-colors">
+                        <button id="tutorial-next" class="px-4 py-1 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-sm font-semibold transition-colors">
                             Next →
                         </button>
                     </div>
@@ -1369,11 +1369,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (stepIndex === tutorialSteps.length - 1) {
             nextBtn.textContent = 'Finish 🎉';
             nextBtn.classList.add('bg-green-500', 'hover:bg-green-400');
-            nextBtn.classList.remove('bg-lamborghini-orange', 'hover:bg-lamborghini-dark-orange');
+            nextBtn.classList.remove('bg-orange-500', 'hover:bg-orange-600');
         } else {
             nextBtn.textContent = 'Next →';
             nextBtn.classList.remove('bg-green-500', 'hover:bg-green-400');
-            nextBtn.classList.add('bg-lamborghini-orange', 'hover:bg-lamborghini-dark-orange');
+            nextBtn.classList.add('bg-orange-500', 'hover:bg-orange-600');
         }
 
         // Highlight target element
@@ -1521,14 +1521,14 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 border border-orange-500 shadow-2xl max-w-md mx-4 text-center">
                 <div class="text-6xl mb-4">🏁</div>
                 <h2 class="text-2xl font-bold text-white mb-4" style="font-family: 'Orbitron', monospace;">
-                    Bienvenue dans DFinance Pro !
+                    Welcome to DFinance !
                 </h2>
                 <p class="text-gray-300 mb-6 leading-relaxed">
-                    Votre gestionnaire financier personnel de niveau Lamborghini ! 
+                    Your premium personal finance manager ! 
                     Voulez-vous découvrir toutes les fonctionnalités avec notre tour guidé interactif ?
                 </p>
                 <div class="flex space-x-4 justify-center">
-                    <button id="start-tour-btn" class="px-6 py-3 bg-lamborghini-orange hover:bg-lamborghini-dark-orange text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center space-x-2">
+                    <button id="start-tour-btn" class="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center space-x-2">
                         <span>🎓</span>
                         <span>Démarrer le tour</span>
                     </button>

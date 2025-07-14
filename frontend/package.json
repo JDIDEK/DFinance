@@ -3,11 +3,11 @@
   "version": "2.0.0",
   "description": "DFinance - Advanced Personal Finance Tracker Frontend",
   "scripts": {
-    "start": "npx http-server . -p 3000 -c-1",
-    "dev": "concurrently \"npm run watch:css\" \"npm run livereload\" \"npx http-server . -p 3000 -c-1\"",
-    "watch:css": "npx tailwindcss -i ./src/input.css -o ./src/tailwind.css --watch",
+    "start": "npx http-server public -p 3000 -c-1",
+    "dev": "concurrently \"npm run watch:css\" \"npm run livereload\" \"npx http-server public -p 3000 -c-1\"",
+    "watch:css": "npx tailwindcss -i ./src/input.css -o ./public/src/tailwind.css --watch",
     "livereload": "npx livereload public src --wait 200 --extraExts css,html,js",
-    "build-css": "npx tailwindcss -i ./src/input.css -o ./src/tailwind.css --minify"
+    "build-css": "npx tailwindcss -i ./src/input.css -o ./public/src/tailwind.css --minify"
   },
   "keywords": ["finance", "tracker", "frontend", "dashboard"],
   "author": "DFinance Team",

@@ -555,12 +555,12 @@ video {
 }
 
 :root {
-  --lamborghini-orange: #FF6B00;
-  --lamborghini-dark-orange: #E55A00;
-  --lamborghini-black: #000000;
-  --lamborghini-dark-gray: #1a1a1a;
-  --lamborghini-gray: #2d2d2d;
-  --lamborghini-light-gray: #404040;
+  #ff6b00: #FF6B00;
+  #e55a00: #E55A00;
+  #000000: #000000;
+  #1a1a1a: #1a1a1a;
+  #2d2d2d: #2d2d2d;
+  #404040: #404040;
   --accent-green: #00FF88;
   --accent-red: #FF3366;
   --accent-blue: #00AAFF;
@@ -947,7 +947,7 @@ body {
   border-color: rgb(239 68 68 / var(--tw-border-opacity, 1));
 }
 
-.border-lamborghini-orange {
+.border-orange-500 {
   --tw-border-opacity: 1;
   border-color: rgb(255 107 0 / var(--tw-border-opacity, 1));
 }
@@ -1022,7 +1022,7 @@ body {
   background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1));
 }
 
-.bg-lamborghini-orange {
+.bg-orange-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(255 107 0 / var(--tw-bg-opacity, 1));
 }
@@ -1101,13 +1101,13 @@ body {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.from-lamborghini-orange {
+.from-orange-500 {
   --tw-gradient-from: #FF6B00 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(255 107 0 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.from-lamborghini-dark-orange {
+.from-orange-600 {
   --tw-gradient-from: #E55A00 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(229 90 0 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
@@ -1146,11 +1146,11 @@ body {
   --tw-gradient-to: #ef4444 var(--tw-gradient-to-position);
 }
 
-.to-lamborghini-dark-orange {
+.to-orange-600 {
   --tw-gradient-to: #E55A00 var(--tw-gradient-to-position);
 }
 
-.to-lamborghini-orange {
+.to-orange-500 {
   --tw-gradient-to: #FF6B00 var(--tw-gradient-to-position);
 }
 
@@ -1357,7 +1357,7 @@ body {
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
-.text-lamborghini-orange {
+.text-orange-500 {
   --tw-text-opacity: 1;
   color: rgb(255 107 0 / var(--tw-text-opacity, 1));
 }
@@ -1443,7 +1443,7 @@ body {
   transition-duration: 500ms;
 }
 
-/* Custom Lamborghini-inspired styles */
+/* Custom modern styles */
 
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;
@@ -1467,12 +1467,12 @@ body {
   border-color: rgb(249 115 22 / var(--tw-border-opacity, 1));
 }
 
-.hover\:border-lamborghini-orange:hover {
+.hover\:border-orange-500:hover {
   --tw-border-opacity: 1;
   border-color: rgb(255 107 0 / var(--tw-border-opacity, 1));
 }
 
-.hover\:border-lamborghini-dark-orange:hover {
+.hover\:border-orange-600:hover {
   --tw-border-opacity: 1;
   border-color: rgb(229 90 0 / var(--tw-border-opacity, 1));
 }
@@ -1507,7 +1507,7 @@ body {
   background-color: rgb(248 113 113 / var(--tw-bg-opacity, 1));
 }
 
-.hover\:bg-lamborghini-dark-orange:hover {
+.hover\:bg-orange-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(229 90 0 / var(--tw-bg-opacity, 1));
 }
@@ -1522,7 +1522,7 @@ body {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.hover\:from-lamborghini-dark-orange:hover {
+.hover\:from-orange-600:hover {
   --tw-gradient-from: #E55A00 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(229 90 0 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
@@ -1532,7 +1532,7 @@ body {
   --tw-gradient-to: #c2410c var(--tw-gradient-to-position);
 }
 
-.hover\:to-lamborghini-orange:hover {
+.hover\:to-orange-500:hover {
   --tw-gradient-to: #FF6B00 var(--tw-gradient-to-position);
 }
 
@@ -1546,7 +1546,7 @@ body {
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
-.hover\:text-lamborghini-dark-orange:hover {
+.hover\:text-orange-600:hover {
   --tw-text-opacity: 1;
   color: rgb(229 90 0 / var(--tw-text-opacity, 1));
 }
@@ -1572,7 +1572,7 @@ body {
   border-color: rgb(249 115 22 / var(--tw-border-opacity, 1));
 }
 
-.focus\:border-lamborghini-orange:focus {
+.focus\:border-orange-500:focus {
   --tw-border-opacity: 1;
   border-color: rgb(255 107 0 / var(--tw-border-opacity, 1));
 }
@@ -1593,7 +1593,7 @@ body {
   --tw-ring-color: rgb(249 115 22 / var(--tw-ring-opacity, 1));
 }
 
-.focus\:ring-lamborghini-orange:focus {
+.focus\:ring-orange-500:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(255 107 0 / var(--tw-ring-opacity, 1));
 }

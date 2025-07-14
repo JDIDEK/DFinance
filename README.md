@@ -1,14 +1,14 @@
-# 🏁 DFinance Pro - Ultimate Personal Finance Tracker
+# 🚀 DFinance - Ultimate Personal Finance Tracker
 
-![DFinance Pro Banner](https://via.placeholder.com/800x200/FF6B00/000000?text=DFINANCE+PRO+-+LAMBORGHINI+INSPIRED+FINANCE+TRACKER)
+![DFinance Banner](https://via.placeholder.com/800x200/FF6B00/000000?text=DFINANCE+-+MODERN+FINANCE+TRACKER)
 
 ## 🚀 Overview
 
-**DFinance** is an advanced personal finance tracker inspired by Lamborghini's iconic orange and black design aesthetic. Built with cutting-edge web technologies, it offers a sleek, high-performance dashboard for managing your financial life with style and precision.
+**DFinance** is an advanced personal finance tracker inspired by modern's iconic orange and black design aesthetic. Built with cutting-edge web technologies, it offers a sleek, high-performance dashboard for managing your financial life with style and precision.
 
 ### ✨ Key Features
 
-- **🏎️ Lamborghini-Inspired Design**: Orange and black color scheme with racing-inspired UI elements
+- **🏎️ modern-Inspired Design**: Orange and black color scheme with racing-inspired UI elements
 - **💰 Advanced Transaction Management**: Track income and expenses with detailed categorization
 - **🎯 Goal Setting & Tracking**: Set financial goals and monitor progress with visual indicators
 - **📊 Interactive Charts**: Real-time data visualization with Chart.js
@@ -140,12 +140,12 @@ docker-compose logs frontend
 ## 🏗️ Architecture
 
 ```
-DFinance Pro/
+DFinance/
 ├── 🐳 docker-compose.yml      # Container orchestration
 ├── 📱 frontend/               # React-like frontend
 │   ├── 🎨 src/
 │   │   ├── app.js            # Main application logic
-│   │   └── styles.css        # Lamborghini-inspired styling
+│   │   └── styles.css        # modern-inspired styling
 │   ├── 🌐 public/
 │   │   └── index.html        # Main HTML template
 │   └── 📦 package.json       # Frontend dependencies
@@ -180,14 +180,14 @@ DFinance Pro/
 
 ### Color Palette
 ```css
-/* Lamborghini Orange */
---lamborghini-orange: #FF6B00
---lamborghini-dark-orange: #E55A00
+/* modern Orange */
+--modern-orange: #FF6B00
+--modern-dark-orange: #E55A00
 
 /* Racing Black */
---lamborghini-black: #000000
---lamborghini-dark-gray: #1a1a1a
---lamborghini-gray: #2d2d2d
+--modern-black: #000000
+--modern-dark-gray: #1a1a1a
+--modern-gray: #2d2d2d
 
 /* Accent Colors */
 --accent-green: #00FF88    /* Income */
@@ -308,7 +308,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🏆 Acknowledgments
 
-- **Lamborghini**: Inspiration for the design aesthetic
+- **modern**: Inspiration for the design aesthetic
 - **Chart.js**: Beautiful data visualization
 - **Tailwind CSS**: Utility-first CSS framework
 - **PostgreSQL**: Robust database system
@@ -342,6 +342,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with 🏁 by the DFinance Pro Team**
+**Built with 🏁 by the DFinance Team**
 
-*Experience the thrill of financial control with Lamborghini-inspired design!*
+*Experience the thrill of financial control with modern-inspired design!*
