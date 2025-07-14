@@ -44,3 +44,9 @@ coverage/
 # Build outputs
 dist/
 build/
+
+# Temporary files
+.venv
+
+# Compiled source #
+.gitignore
