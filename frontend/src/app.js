@@ -37,6 +37,102 @@ document.addEventListener('DOMContentLoaded', () => {
     let categoryChartInstance = null;
     let monthlyChartInstance = null;
 
+    // Tutorial system
+    let currentTutorialStep = 0;
+    let tutorialActive = false;
+    const tutorialSteps = [
+        {
+            target: '#live-time',
+            title: '⚡ Temps en direct',
+            content: 'L\'heure se met à jour en temps réel. Parfait pour suivre le temps que vous passez à gérer vos finances !',
+            position: 'bottom'
+        },
+        {
+            target: '#total-income',
+            title: '💰 Revenus totaux',
+            content: 'Ici s\'affichent tous vos revenus cumulés. Cette valeur se met à jour automatiquement à chaque nouvelle transaction.',
+            position: 'bottom'
+        },
+        {
+            target: '#total-expenses',
+            title: '💸 Dépenses totales',
+            content: 'Le total de toutes vos dépenses. Gardez un œil dessus pour contrôler votre budget !',
+            position: 'bottom'
+        },
+        {
+            target: '#net-balance',
+            title: '⚖️ Solde net',
+            content: 'Votre solde net (revenus - dépenses). En vert si positif, en rouge si négatif.',
+            position: 'bottom'
+        },
+        {
+            target: '#month-savings',
+            title: '📈 Épargne du mois',
+            content: 'Combien vous avez économisé ce mois-ci. L\'objectif est de garder ce chiffre positif !',
+            position: 'bottom'
+        },
+        {
+            target: '#transaction-form',
+            title: '⚡ Ajouter une transaction',
+            content: 'Formulaire principal pour ajouter vos revenus et dépenses. Remplissez simplement les champs et cliquez sur "ADD TRANSACTION".',
+            position: 'right'
+        },
+        {
+            target: '#type',
+            title: '🔄 Type de transaction',
+            content: 'Choisissez entre "Dépense" ou "Revenu". Les catégories changeront automatiquement selon votre choix.',
+            position: 'right'
+        },
+        {
+            target: '#category',
+            title: '📂 Catégories',
+            content: 'Sélectionnez la catégorie appropriée. Chaque catégorie a son icône pour faciliter l\'identification.',
+            position: 'right'
+        },
+        {
+            target: '#payment_method',
+            title: '💳 Méthode de paiement',
+            content: 'Indiquez comment vous avez payé : espèces, carte, virement, ou même crypto !',
+            position: 'right'
+        },
+        {
+            target: '#goals-list',
+            title: '🎯 Objectifs financiers',
+            content: 'Définissez et suivez vos objectifs d\'épargne. Ajoutez des montants pour voir votre progression !',
+            position: 'right'
+        },
+        {
+            target: '#add-goal-btn',
+            title: '➕ Ajouter un objectif',
+            content: 'Cliquez ici pour créer un nouvel objectif financier avec un montant cible et une date limite.',
+            position: 'left'
+        },
+        {
+            target: '#category-chart',
+            title: '🍩 Graphique des catégories',
+            content: 'Visualisez la répartition de vos dépenses par catégorie. Parfait pour identifier où va votre argent !',
+            position: 'top'
+        },
+        {
+            target: '#monthly-chart',
+            title: '📊 Tendances mensuelles',
+            content: 'Suivez l\'évolution de vos revenus et dépenses sur les 6 derniers mois. Idéal pour détecter les tendances.',
+            position: 'top'
+        },
+        {
+            target: '#filter-all',
+            title: '🔍 Filtres de transactions',
+            content: 'Filtrez vos transactions par type : toutes, revenus seulement, ou dépenses seulement.',
+            position: 'left'
+        },
+        {
+            target: '#transaction-list',
+            title: '📋 Liste des transactions',
+            content: 'Toutes vos transactions récentes s\'affichent ici. Vous pouvez les modifier ou les supprimer avec les boutons à droite.',
+            position: 'top'
+        }
+    ];
+
     // Initialize application
     function initialize() {
         setupEventListeners();
@@ -44,6 +140,13 @@ document.addEventListener('DOMContentLoaded', () => {
         setDefaultDate();
         loadInitialData();
         setupChartDefaults();
+        
+        // Check if this is the first visit
+        setTimeout(() => {
+            if (!localStorage.getItem('dfinance_tutorial_completed')) {
+                showWelcomeMessage();
+            }
+        }, 2000);
     }
 
     // Setup event listeners
@@ -829,4 +932,275 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize the application
     initialize();
+
+    // Tutorial functions
+    function startTutorial() {
+        tutorialActive = true;
+        currentTutorialStep = 0;
+        createTutorialOverlay();
+        showTutorialStep(currentTutorialStep);
+        
+        // Show tutorial start notification
+        showNotification('🎓 Bienvenue dans le tour guidé de DFinance !', 'info');
+    }
+
+    function createTutorialOverlay() {
+        // Create overlay with blur effect
+        const overlay = document.createElement('div');
+        overlay.id = 'tutorial-overlay';
+        overlay.className = 'fixed inset-0 z-40 transition-all duration-500';
+        overlay.style.backdropFilter = 'blur(4px) brightness(0.4)';
+        overlay.style.webkitBackdropFilter = 'blur(4px) brightness(0.4)';
+        document.body.appendChild(overlay);
+
+        // Create tutorial tooltip
+        const tooltip = document.createElement('div');
+        tooltip.id = 'tutorial-tooltip';
+        tooltip.className = 'fixed z-50 bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-xl p-6 shadow-2xl border border-orange-500 max-w-sm transition-all duration-500 transform';
+        tooltip.innerHTML = `
+            <div id="tutorial-content">
+                <h3 id="tutorial-title" class="text-lg font-bold text-orange-400 mb-3"></h3>
+                <p id="tutorial-text" class="text-gray-300 mb-4 leading-relaxed"></p>
+                <div class="flex items-center justify-between">
+                    <div id="tutorial-progress" class="text-xs text-gray-400"></div>
+                    <div class="flex space-x-2">
+                        <button id="tutorial-skip" class="px-3 py-1 bg-gray-600 hover:bg-gray-500 text-white rounded-lg text-sm transition-colors">
+                            Passer
+                        </button>
+                        <button id="tutorial-prev" class="px-3 py-1 bg-orange-600 hover:bg-orange-500 text-white rounded-lg text-sm transition-colors">
+                            Précédent ←
+                        </button>
+                        <button id="tutorial-next" class="px-4 py-1 bg-orange-500 hover:bg-orange-400 text-white rounded-lg text-sm font-semibold transition-colors">
+                            Suivant →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(tooltip);
+
+        // Add event listeners
+        document.getElementById('tutorial-skip').addEventListener('click', endTutorial);
+        document.getElementById('tutorial-prev').addEventListener('click', previousTutorialStep);
+        document.getElementById('tutorial-next').addEventListener('click', nextTutorialStep);
+        
+        // Close tutorial on overlay click
+        overlay.addEventListener('click', endTutorial);
+    }
+
+    function showTutorialStep(stepIndex) {
+        const step = tutorialSteps[stepIndex];
+        const target = document.querySelector(step.target);
+        const tooltip = document.getElementById('tutorial-tooltip');
+        
+        if (!target || !tooltip) return;
+
+        // Update tooltip content
+        document.getElementById('tutorial-title').textContent = step.title;
+        document.getElementById('tutorial-text').textContent = step.content;
+        document.getElementById('tutorial-progress').textContent = `Étape ${stepIndex + 1} sur ${tutorialSteps.length}`;
+        
+        // Update button states
+        const prevBtn = document.getElementById('tutorial-prev');
+        const nextBtn = document.getElementById('tutorial-next');
+        
+        prevBtn.style.display = stepIndex === 0 ? 'none' : 'block';
+        
+        if (stepIndex === tutorialSteps.length - 1) {
+            nextBtn.textContent = 'Terminer 🎉';
+            nextBtn.classList.add('bg-green-500', 'hover:bg-green-400');
+            nextBtn.classList.remove('bg-orange-500', 'hover:bg-orange-400');
+        } else {
+            nextBtn.textContent = 'Suivant →';
+            nextBtn.classList.remove('bg-green-500', 'hover:bg-green-400');
+            nextBtn.classList.add('bg-orange-500', 'hover:bg-orange-400');
+        }
+
+        // Highlight target element
+        highlightElement(target);
+        
+        // Position tooltip
+        positionTooltip(tooltip, target, step.position);
+        
+        // Scroll target into view
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function highlightElement(element) {
+        // Remove previous highlights
+        document.querySelectorAll('.tutorial-highlight').forEach(el => {
+            el.classList.remove('tutorial-highlight');
+        });
+        
+        // Add highlight to current element
+        element.classList.add('tutorial-highlight');
+        
+        // Add highlight styles if not already added
+        if (!document.getElementById('tutorial-styles')) {
+            const style = document.createElement('style');
+            style.id = 'tutorial-styles';
+            style.textContent = `
+                .tutorial-highlight {
+                    position: relative;
+                    z-index: 45;
+                    box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.9), 0 0 30px rgba(255, 107, 0, 0.6), 0 0 60px rgba(255, 107, 0, 0.3);
+                    border-radius: 12px;
+                    animation: tutorialPulse 2.5s infinite;
+                    backdrop-filter: none !important;
+                    filter: brightness(1.2) contrast(1.1);
+                    transform: scale(1.02);
+                    transition: all 0.3s ease;
+                }
+                
+                @keyframes tutorialPulse {
+                    0%, 100% { 
+                        box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.9), 0 0 30px rgba(255, 107, 0, 0.6), 0 0 60px rgba(255, 107, 0, 0.3);
+                        transform: scale(1.02);
+                    }
+                    50% { 
+                        box-shadow: 0 0 0 8px rgba(255, 107, 0, 0.7), 0 0 40px rgba(255, 107, 0, 0.8), 0 0 80px rgba(255, 107, 0, 0.5);
+                        transform: scale(1.04);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    }
+
+    function positionTooltip(tooltip, target, position) {
+        const targetRect = target.getBoundingClientRect();
+        const tooltipRect = tooltip.getBoundingClientRect();
+        const padding = 20;
+        
+        let top, left;
+        
+        switch (position) {
+            case 'top':
+                top = targetRect.top - tooltipRect.height - padding;
+                left = targetRect.left + (targetRect.width - tooltipRect.width) / 2;
+                break;
+            case 'bottom':
+                top = targetRect.bottom + padding;
+                left = targetRect.left + (targetRect.width - tooltipRect.width) / 2;
+                break;
+            case 'left':
+                top = targetRect.top + (targetRect.height - tooltipRect.height) / 2;
+                left = targetRect.left - tooltipRect.width - padding;
+                break;
+            case 'right':
+                top = targetRect.top + (targetRect.height - tooltipRect.height) / 2;
+                left = targetRect.right + padding;
+                break;
+            default:
+                top = targetRect.bottom + padding;
+                left = targetRect.left + (targetRect.width - tooltipRect.width) / 2;
+        }
+        
+        // Ensure tooltip stays within viewport
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        
+        if (left < padding) left = padding;
+        if (left + tooltipRect.width > windowWidth - padding) {
+            left = windowWidth - tooltipRect.width - padding;
+        }
+        if (top < padding) top = padding;
+        if (top + tooltipRect.height > windowHeight - padding) {
+            top = windowHeight - tooltipRect.height - padding;
+        }
+        
+        tooltip.style.top = `${top}px`;
+        tooltip.style.left = `${left}px`;
+        tooltip.style.transform = 'scale(1)';
+        tooltip.style.opacity = '1';
+    }
+
+    function nextTutorialStep() {
+        if (currentTutorialStep < tutorialSteps.length - 1) {
+            currentTutorialStep++;
+            showTutorialStep(currentTutorialStep);
+        } else {
+            endTutorial();
+        }
+    }
+
+    function previousTutorialStep() {
+        if (currentTutorialStep > 0) {
+            currentTutorialStep--;
+            showTutorialStep(currentTutorialStep);
+        }
+    }
+
+    function endTutorial() {
+        tutorialActive = false;
+        
+        // Remove tutorial elements
+        const overlay = document.getElementById('tutorial-overlay');
+        const tooltip = document.getElementById('tutorial-tooltip');
+        const styles = document.getElementById('tutorial-styles');
+        
+        if (overlay) overlay.remove();
+        if (tooltip) tooltip.remove();
+        if (styles) styles.remove();
+        
+        // Remove highlights
+        document.querySelectorAll('.tutorial-highlight').forEach(el => {
+            el.classList.remove('tutorial-highlight');
+        });
+        
+        // Mark tutorial as completed
+        localStorage.setItem('dfinance_tutorial_completed', 'true');
+        
+        showNotification('🎉 Tour guidé terminé ! Vous maîtrisez maintenant DFinance !', 'success');
+    }
+
+    function showWelcomeMessage() {
+        const welcomeModal = document.createElement('div');
+        welcomeModal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+        welcomeModal.innerHTML = `
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 border border-orange-500 shadow-2xl max-w-md mx-4 text-center">
+                <div class="text-6xl mb-4">🏁</div>
+                <h2 class="text-2xl font-bold text-white mb-4" style="font-family: 'Orbitron', monospace;">
+                    Bienvenue dans DFinance Pro !
+                </h2>
+                <p class="text-gray-300 mb-6 leading-relaxed">
+                    Votre gestionnaire financier personnel de niveau Lamborghini ! 
+                    Voulez-vous découvrir toutes les fonctionnalités avec notre tour guidé interactif ?
+                </p>
+                <div class="flex space-x-4 justify-center">
+                    <button id="start-tour-btn" class="px-6 py-3 bg-orange-500 hover:bg-orange-400 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center space-x-2">
+                        <span>🎓</span>
+                        <span>Démarrer le tour</span>
+                    </button>
+                    <button id="skip-tour-btn" class="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-lg font-semibold transition-all duration-300">
+                        Plus tard
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(welcomeModal);
+        
+        // Add event listeners
+        document.getElementById('start-tour-btn').addEventListener('click', () => {
+            welcomeModal.remove();
+            setTimeout(startTutorial, 500);
+        });
+        
+        document.getElementById('skip-tour-btn').addEventListener('click', () => {
+            welcomeModal.remove();
+            localStorage.setItem('dfinance_tutorial_completed', 'true');
+        });
+        
+        // Close on backdrop click
+        welcomeModal.addEventListener('click', (e) => {
+            if (e.target === welcomeModal) {
+                welcomeModal.remove();
+                localStorage.setItem('dfinance_tutorial_completed', 'true');
+            }
+        });
+    }
+
+    // Expose tutorial function globally
+    window.startTutorial = startTutorial;
 });
