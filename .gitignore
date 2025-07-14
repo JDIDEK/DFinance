@@ -47,6 +47,3 @@ build/
 
 # Temporary files
 .venv
-
-# Compiled source #
-.gitignore
