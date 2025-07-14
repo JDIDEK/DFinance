@@ -1058,7 +1058,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const goal = state.goals.find(g => g.id === goalId);
         if (!goal) return;
 
-        // Créer une modale personnalisée identique au style edit
+        // Create a custom modal identical to edit style
         const addFundsModal = document.createElement('div');
         addFundsModal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
         addFundsModal.innerHTML = `
@@ -1092,7 +1092,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(addFundsModal);
         document.getElementById('funds-amount').focus();
 
-        // Gérer la soumission du formulaire
+        // Handle form submission
         document.getElementById('add-funds-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -1125,19 +1125,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Gérer l'annulation
+        // Handle cancellation
         document.getElementById('cancel-add-funds').addEventListener('click', () => {
             addFundsModal.remove();
         });
 
-        // Fermer la modale en cliquant à l'extérieur
+        // Close modal by clicking outside
         addFundsModal.addEventListener('click', (e) => {
             if (e.target === addFundsModal) {
                 addFundsModal.remove();
             }
         });
 
-        // Fermer avec Escape
+        // Close with Escape key
         const handleEscape = (e) => {
             if (e.key === 'Escape') {
                 addFundsModal.remove();
@@ -1511,7 +1511,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Mark tutorial as completed
         localStorage.setItem('dfinance_tutorial_completed', 'true');
         
-        showNotification('🎉 Tour guidé terminé ! Vous maîtrisez maintenant DFinance !', 'success');
+        showNotification('🎉 Guided tour completed! You now master DFinance!', 'success');
     }
 
     function showWelcomeMessage() {
@@ -1521,19 +1521,19 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 border border-orange-500 shadow-2xl max-w-md mx-4 text-center">
                 <div class="text-6xl mb-4">🏁</div>
                 <h2 class="text-2xl font-bold text-white mb-4" style="font-family: 'Orbitron', monospace;">
-                    Bienvenue dans DFinance !
+                    Welcome to DFinance!
                 </h2>
                 <p class="text-gray-300 mb-6 leading-relaxed">
-                    Your premium personal finance manager ! 
-                    Voulez-vous découvrir toutes les fonctionnalités avec notre tour guidé interactif ?
+                    Your premium personal finance manager! 
+                    Would you like to explore all features with our interactive guided tour?
                 </p>
                 <div class="flex space-x-4 justify-center">
                     <button id="start-tour-btn" class="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center space-x-2">
                         <span>🎓</span>
-                        <span>Démarrer le tour</span>
+                        <span>Start Tour</span>
                     </button>
                     <button id="skip-tour-btn" class="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-lg font-semibold transition-all duration-300">
-                        Plus tard
+                        Later
                     </button>
                 </div>
             </div>
