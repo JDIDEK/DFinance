@@ -1,12 +1,12 @@
-/* DFinance - Modern Styling */
+/* DFinance - modern-Inspired Styling */
 
 :root {
-    #ff6b00: #FF6B00;
-    #e55a00: #E55A00;
-    #000000: #000000;
-    #1a1a1a: #1a1a1a;
-    #2d2d2d: #2d2d2d;
-    #404040: #404040;
+    --color-ff6b00: #FF6B00;
+    --color-e55a00: #E55A00;
+    --color-000000: #000000;
+    --color-1a1a1a: #1a1a1a;
+    --color-2d2d2d: #2d2d2d;
+    --color-404040: #404040;
     --accent-green: #00FF88;
     --accent-red: #FF3366;
     --accent-blue: #00AAFF;
@@ -25,7 +25,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Modern style animations */
+/* modern-style animations */
 @keyframes pulse-orange {
     0%, 100% { box-shadow: 0 0 5px var(#ff6b00); }
     50% { box-shadow: 0 0 20px var(#ff6b00), 0 0 30px var(#ff6b00); }
@@ -59,7 +59,7 @@ body {
     }
 }
 
-/* Custom scrollbar - Modern style */
+/* Custom scrollbar - modern style */
 .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
 }
@@ -340,8 +340,8 @@ select:focus {
 /* High contrast mode support */
 @media (prefers-contrast: high) {
     :root {
-        #ff6b00: #FFB000;
-        #000000: #000000;
-        #2d2d2d: #404040;
+        --color-ff6b00: #FFB000;
+        --color-000000: #000000;
+        --color-2d2d2d: #404040;
     }
 }

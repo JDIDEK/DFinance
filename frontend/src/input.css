@@ -5,12 +5,12 @@
 /* Custom modern styles */
 @layer base {
   :root {
-    #ff6b00: #FF6B00;
-    #e55a00: #E55A00;
-    #000000: #000000;
-    #1a1a1a: #1a1a1a;
-    #2d2d2d: #2d2d2d;
-    #404040: #404040;
+    --color-ff6b00: #FF6B00;
+    --color-e55a00: #E55A00;
+    --color-000000: #000000;
+    --color-1a1a1a: #1a1a1a;
+    --color-2d2d2d: #2d2d2d;
+    --color-404040: #404040;
     --accent-green: #00FF88;
     --accent-red: #FF3366;
     --accent-blue: #00AAFF;

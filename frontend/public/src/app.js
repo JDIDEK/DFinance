@@ -600,22 +600,22 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Enhanced orange color palette with better contrast
         const enhancedOrangePalette = [
-            '#FF6B00',  // Orange vif principal
-            '#FF8C42',  // Orange coral
-            '#FF4500',  // Orange rouge
-            '#FFB347',  // Orange pêche
-            '#FF7F00',  // Orange pur
-            '#FF9500',  // Orange doré
-            '#FF5722',  // Orange profond
-            '#FFAB00',  // Orange ambre
-            '#FF6F00',  // Orange foncé
-            '#FF8F65',  // Orange saumon
-            '#FF3D00',  // Orange rouge vif
-            '#FFA726',  // Orange clair
-            '#E65100',  // Orange brûlé
-            '#FFB74D',  // Orange pastel
-            '#FF5C00',  // Orange intense
-            '#FFCC80'   // Orange très clair
+            '#FF6B00',  // Bright main orange
+            '#FF8C42',  // Coral orange
+            '#FF4500',  // Red orange
+            '#FFB347',  // Peach orange
+            '#FF7F00',  // Pure orange
+            '#FF9500',  // Golden orange
+            '#FF5722',  // Deep orange
+            '#FFAB00',  // Amber orange
+            '#FF6F00',  // Dark orange
+            '#FF8F65',  // Salmon orange
+            '#FF3D00',  // Bright red orange
+            '#FFA726',  // Light orange
+            '#E65100',  // Burnt orange
+            '#FFB74D',  // Pastel orange
+            '#FF5C00',  // Intense orange
+            '#FFCC80'   // Very light orange
         ];
 
         const chartData = {
@@ -1511,7 +1511,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Mark tutorial as completed
         localStorage.setItem('dfinance_tutorial_completed', 'true');
         
-        showNotification('🎉 Tour guidé terminé ! Vous maîtrisez maintenant DFinance !', 'success');
+        showNotification('🎉 Guided tour completed! You now master DFinance!', 'success');
     }
 
     function showWelcomeMessage() {
@@ -1525,15 +1525,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 </h2>
                 <p class="text-gray-300 mb-6 leading-relaxed">
                     Your premium personal finance manager ! 
-                    Voulez-vous découvrir toutes les fonctionnalités avec notre tour guidé interactif ?
+                    Would you like to explore all features with our interactive guided tour?
                 </p>
                 <div class="flex space-x-4 justify-center">
                     <button id="start-tour-btn" class="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center space-x-2">
                         <span>🎓</span>
-                        <span>Démarrer le tour</span>
+                        <span>Start Tour</span>
                     </button>
                     <button id="skip-tour-btn" class="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-lg font-semibold transition-all duration-300">
-                        Plus tard
+                        Later
                     </button>
                 </div>
             </div>

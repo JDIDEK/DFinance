@@ -600,22 +600,22 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Enhanced orange color palette with better contrast
         const enhancedOrangePalette = [
-            '#FF6B00',  // Orange vif principal
-            '#FF8C42',  // Orange coral
-            '#FF4500',  // Orange rouge
-            '#FFB347',  // Orange pêche
-            '#FF7F00',  // Orange pur
-            '#FF9500',  // Orange doré
-            '#FF5722',  // Orange profond
-            '#FFAB00',  // Orange ambre
-            '#FF6F00',  // Orange foncé
-            '#FF8F65',  // Orange saumon
-            '#FF3D00',  // Orange rouge vif
-            '#FFA726',  // Orange clair
-            '#E65100',  // Orange brûlé
-            '#FFB74D',  // Orange pastel
-            '#FF5C00',  // Orange intense
-            '#FFCC80'   // Orange très clair
+            '#FF6B00',  // Bright main orange
+            '#FF8C42',  // Coral orange
+            '#FF4500',  // Red orange
+            '#FFB347',  // Peach orange
+            '#FF7F00',  // Pure orange
+            '#FF9500',  // Golden orange
+            '#FF5722',  // Deep orange
+            '#FFAB00',  // Amber orange
+            '#FF6F00',  // Dark orange
+            '#FF8F65',  // Salmon orange
+            '#FF3D00',  // Bright red orange
+            '#FFA726',  // Light orange
+            '#E65100',  // Burnt orange
+            '#FFB74D',  // Pastel orange
+            '#FF5C00',  // Intense orange
+            '#FFCC80'   // Very light orange
         ];
 
         const chartData = {
@@ -1058,7 +1058,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const goal = state.goals.find(g => g.id === goalId);
         if (!goal) return;
 
-        // Create a custom modal identical to edit style
+        // Créer une modale personnalisée identique au style edit
         const addFundsModal = document.createElement('div');
         addFundsModal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
         addFundsModal.innerHTML = `
@@ -1092,7 +1092,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(addFundsModal);
         document.getElementById('funds-amount').focus();
 
-        // Handle form submission
+        // Gérer la soumission du formulaire
         document.getElementById('add-funds-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -1125,19 +1125,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Handle cancellation
+        // Gérer l'annulation
         document.getElementById('cancel-add-funds').addEventListener('click', () => {
             addFundsModal.remove();
         });
 
-        // Close modal by clicking outside
+        // Fermer la modale en cliquant à l'extérieur
         addFundsModal.addEventListener('click', (e) => {
             if (e.target === addFundsModal) {
                 addFundsModal.remove();
             }
         });
 
-        // Close with Escape key
+        // Fermer avec Escape
         const handleEscape = (e) => {
             if (e.key === 'Escape') {
                 addFundsModal.remove();
@@ -1521,10 +1521,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 border border-orange-500 shadow-2xl max-w-md mx-4 text-center">
                 <div class="text-6xl mb-4">🏁</div>
                 <h2 class="text-2xl font-bold text-white mb-4" style="font-family: 'Orbitron', monospace;">
-                    Welcome to DFinance!
+                    Welcome to DFinance !
                 </h2>
                 <p class="text-gray-300 mb-6 leading-relaxed">
-                    Your premium personal finance manager! 
+                    Your premium personal finance manager ! 
                     Would you like to explore all features with our interactive guided tour?
                 </p>
                 <div class="flex space-x-4 justify-center">
