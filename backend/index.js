@@ -328,6 +328,68 @@ app.put('/goals/:id/progress', async (req, res) => {
   }
 });
 
+// Update goal (edit goal details)
+app.put('/goals/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, target_amount, target_date, current_amount } = req.body;
+    
+    const result = await pool.query(
+      `UPDATE goals SET 
+        title = $1, 
+        target_amount = $2, 
+        target_date = $3, 
+        current_amount = $4,
+        updated_at = CURRENT_TIMESTAMP 
+       WHERE id = $5 RETURNING *`,
+      [title, parseFloat(target_amount), target_date, parseFloat(current_amount || 0), id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Goal not found' });
+    }
+
+    // Check if goal is completed after update
+    const goal = result.rows[0];
+    if (goal.current_amount >= goal.target_amount && goal.status !== 'completed') {
+      await pool.query(
+        "UPDATE goals SET status = 'completed', updated_at = CURRENT_TIMESTAMP WHERE id = $1",
+        [id]
+      );
+      goal.status = 'completed';
+    } else if (goal.current_amount < goal.target_amount && goal.status === 'completed') {
+      await pool.query(
+        "UPDATE goals SET status = 'active', updated_at = CURRENT_TIMESTAMP WHERE id = $1",
+        [id]
+      );
+      goal.status = 'active';
+    }
+
+    res.json(goal);
+  } catch (err) {
+    console.error('Error updating goal:', err);
+    res.status(500).json({ error: 'Failed to update goal' });
+  }
+});
+
+// Delete goal
+app.delete('/goals/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const result = await pool.query('DELETE FROM goals WHERE id = $1 RETURNING id', [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Goal not found' });
+    }
+
+    res.json({ message: 'Goal deleted successfully', id: result.rows[0].id });
+  } catch (err) {
+    console.error('Error deleting goal:', err);
+    res.status(500).json({ error: 'Failed to delete goal' });
+  }
+});
+
 // BUDGETS ROUTES
 
 // Get current month budgets

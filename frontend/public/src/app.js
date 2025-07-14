@@ -547,23 +547,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="bg-gray-700 rounded-lg p-4 border border-gray-600 hover:border-orange-500 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <h4 class="font-semibold text-white">${goal.title}</h4>
-                        <span class="text-sm ${statusColor}">${Math.round(progress)}%</span>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm ${statusColor}">${Math.round(progress)}%</span>
+                            <div class="flex space-x-1">
+                                <button onclick="editGoal(${goal.id})" 
+                                        class="p-1 bg-blue-500 bg-opacity-20 text-blue-400 rounded hover:bg-opacity-30 transition-all text-xs"
+                                        title="Modifier l'objectif">
+                                    ✏️
+                                </button>
+                                <button onclick="deleteGoal(${goal.id})" 
+                                        class="p-1 bg-red-500 bg-opacity-20 text-red-400 rounded hover:bg-opacity-30 transition-all text-xs"
+                                        title="Supprimer l'objectif">
+                                    🗑️
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="goal-progress mb-3">
                         <div class="goal-progress-bar" style="width: ${progress}%"></div>
                     </div>
                     <div class="flex justify-between text-sm text-gray-400">
                         <span>${formatCurrency(goal.current_amount)} / ${formatCurrency(goal.target_amount)}</span>
-                        ${daysLeft !== null ? `<span>${daysLeft > 0 ? `${daysLeft} days left` : 'Overdue'}</span>` : ''}
+                        ${daysLeft !== null ? `<span>${daysLeft > 0 ? `${daysLeft} jours restants` : 'En retard'}</span>` : ''}
                     </div>
                     ${!isCompleted ? `
                         <button onclick="addToGoal(${goal.id})" 
                                 class="mt-2 w-full text-xs bg-orange-500 bg-opacity-20 text-orange-400 py-1 rounded hover:bg-opacity-30 transition-all">
-                            + Add Progress
+                            + Ajouter des fonds
                         </button>
                     ` : `
                         <div class="mt-2 text-center">
-                            <span class="text-green-400 text-sm font-semibold">🏆 Goal Achieved!</span>
+                            <span class="text-green-400 text-sm font-semibold">🏆 Objectif atteint !</span>
                         </div>
                     `}
                 </div>
@@ -584,19 +598,37 @@ document.addEventListener('DOMContentLoaded', () => {
         const labels = Object.keys(expenseData);
         const data = Object.values(expenseData);
         
+        // Enhanced orange color palette with better contrast
+        const enhancedOrangePalette = [
+            '#FF6B00',  // Orange vif principal
+            '#FF8C42',  // Orange coral
+            '#FF4500',  // Orange rouge
+            '#FFB347',  // Orange pêche
+            '#FF7F00',  // Orange pur
+            '#FF9500',  // Orange doré
+            '#FF5722',  // Orange profond
+            '#FFAB00',  // Orange ambre
+            '#FF6F00',  // Orange foncé
+            '#FF8F65',  // Orange saumon
+            '#FF3D00',  // Orange rouge vif
+            '#FFA726',  // Orange clair
+            '#E65100',  // Orange brûlé
+            '#FFB74D',  // Orange pastel
+            '#FF5C00',  // Orange intense
+            '#FFCC80'   // Orange très clair
+        ];
+
         const chartData = {
             labels: labels.length > 0 ? labels : ['No expenses yet'],
             datasets: [{
                 label: 'Expenses by Category',
                 data: data.length > 0 ? data : [1],
-                backgroundColor: [
-                    '#FF6B00', '#FF8C00', '#FF4500', '#E55A00',
-                    '#CC4900', '#B33F00', '#993600', '#802D00',
-                    '#662400', '#4D1B00', '#331200', '#1A0900'
-                ],
-                borderColor: '#1a1a1a',
-                borderWidth: 2,
-                hoverOffset: 8
+                backgroundColor: enhancedOrangePalette.slice(0, Math.max(labels.length, 1)),
+                borderColor: '#000000',
+                borderWidth: 3,
+                hoverOffset: 12,
+                hoverBorderWidth: 4,
+                hoverBorderColor: '#FFFFFF'
             }]
         };
 
@@ -615,21 +647,51 @@ document.addEventListener('DOMContentLoaded', () => {
                             position: 'bottom',
                             labels: {
                                 color: '#ffffff',
-                                font: { size: 12 }
+                                font: { 
+                                    size: 12,
+                                    weight: 'bold'
+                                },
+                                padding: 15,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
                             }
                         },
                         tooltip: {
-                            backgroundColor: '#1a1a1a',
+                            backgroundColor: 'rgba(0, 0, 0, 0.9)',
                             titleColor: '#FF6B00',
                             bodyColor: '#ffffff',
                             borderColor: '#FF6B00',
-                            borderWidth: 1,
+                            borderWidth: 2,
+                            cornerRadius: 12,
+                            padding: 12,
+                            titleFont: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 13
+                            },
                             callbacks: {
                                 label: function(context) {
-                                    return `${context.label}: ${formatCurrency(context.parsed)}`;
+                                    const percentage = ((context.parsed / context.dataset.data.reduce((a, b) => a + b, 0)) * 100).toFixed(1);
+                                    return `${context.label}: ${formatCurrency(context.parsed)} (${percentage}%)`;
                                 }
                             }
                         }
+                    },
+                    elements: {
+                        arc: {
+                            borderWidth: 3,
+                            borderColor: '#000000',
+                            hoverBorderWidth: 4,
+                            hoverBorderColor: '#FFFFFF'
+                        }
+                    },
+                    animation: {
+                        animateRotate: true,
+                        animateScale: true,
+                        duration: 1500,
+                        easing: 'easeOutQuart'
                     }
                 }
             });
@@ -822,44 +884,93 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showNotification(message, type = 'info') {
-        // Create notification element
+        // Create or get notification container
+        let notificationContainer = document.getElementById('notification-container');
+        if (!notificationContainer) {
+            notificationContainer = document.createElement('div');
+            notificationContainer.id = 'notification-container';
+            notificationContainer.className = 'fixed top-4 right-4 z-50 space-y-3 max-w-sm';
+            document.body.appendChild(notificationContainer);
+        }
+
+        // Create notification element with enhanced styling
         const notification = document.createElement('div');
-        notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-xl max-w-sm transform transition-all duration-300 ${
-            type === 'success' ? 'bg-green-600' :
-            type === 'error' ? 'bg-red-600' :
-            type === 'warning' ? 'bg-orange-500' :
-            'bg-blue-600'
+        notification.className = `p-4 rounded-xl shadow-2xl transform transition-all duration-500 border-2 ${
+            type === 'success' ? 'bg-gradient-to-r from-green-600 to-green-500 border-green-400' :
+            type === 'error' ? 'bg-gradient-to-r from-red-600 to-red-500 border-red-400' :
+            type === 'warning' ? 'bg-gradient-to-r from-orange-600 to-orange-500 border-orange-400' :
+            'bg-gradient-to-r from-blue-600 to-blue-500 border-blue-400'
         } text-white`;
+        
+        // Add backdrop blur and initial transform for animation
+        notification.style.backdropFilter = 'blur(10px) saturate(180%)';
+        notification.style.webkitBackdropFilter = 'blur(10px) saturate(180%)';
+        notification.style.backgroundColor = type === 'success' ? 'rgba(34, 197, 94, 0.9)' :
+                                           type === 'error' ? 'rgba(239, 68, 68, 0.9)' :
+                                           type === 'warning' ? 'rgba(249, 115, 22, 0.9)' :
+                                           'rgba(59, 130, 246, 0.9)';
+        notification.style.transform = 'translateX(100%) scale(0.8)';
+        notification.style.opacity = '0';
         
         notification.innerHTML = `
             <div class="flex items-center space-x-3">
-                <span class="text-xl">
-                    ${type === 'success' ? '✅' :
-                      type === 'error' ? '❌' :
-                      type === 'warning' ? '⚠️' :
-                      'ℹ️'}
-                </span>
-                <span class="font-semibold">${message}</span>
+                <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
+                    type === 'success' ? 'bg-green-400 bg-opacity-30' :
+                    type === 'error' ? 'bg-red-400 bg-opacity-30' :
+                    type === 'warning' ? 'bg-orange-400 bg-opacity-30' :
+                    'bg-blue-400 bg-opacity-30'
+                }">
+                    <span class="text-lg">
+                        ${type === 'success' ? '✅' :
+                          type === 'error' ? '❌' :
+                          type === 'warning' ? '⚠️' :
+                          'ℹ️'}
+                    </span>
+                </div>
+                <div class="flex-1">
+                    <p class="font-semibold text-sm leading-relaxed">${message}</p>
+                </div>
+                <button onclick="removeNotification(this.parentElement.parentElement)" class="flex-shrink-0 text-white opacity-70 hover:opacity-100 transition-opacity">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"></path>
+                    </svg>
+                </button>
             </div>
         `;
         
-        document.body.appendChild(notification);
+        // Add to container (stack from top to bottom)
+        notificationContainer.appendChild(notification);
         
-        // Animate in
+        // Animate in with slide and scale effect
         setTimeout(() => {
-            notification.style.transform = 'translateX(0)';
+            notification.style.transform = 'translateX(0) scale(1)';
+            notification.style.opacity = '1';
         }, 100);
         
-        // Remove after 3 seconds
+        // Auto-remove after 4 seconds
         setTimeout(() => {
-            notification.style.transform = 'translateX(100%)';
+            removeNotification(notification);
+        }, 4000);
+    }
+
+    // Helper function to remove notification with animation
+    window.removeNotification = function(notification) {
+        if (notification && notification.parentNode) {
+            notification.style.transform = 'translateX(100%) scale(0.8)';
+            notification.style.opacity = '0';
             setTimeout(() => {
                 if (notification.parentNode) {
                     notification.parentNode.removeChild(notification);
+                    
+                    // Clean up container if empty
+                    const container = document.getElementById('notification-container');
+                    if (container && container.children.length === 0) {
+                        container.remove();
+                    }
                 }
             }, 300);
-        }, 3000);
-    }
+        }
+    };
 
     // Global functions for onclick handlers
     window.editTransaction = function(id) {
@@ -883,29 +994,68 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.deleteTransaction = async function(id) {
-        if (!confirm('Are you sure you want to delete this transaction? This action cannot be undone.')) {
-            return;
-        }
-
-        try {
-            const response = await fetch(`${API_URL}/transactions/${id}`, { 
-                method: 'DELETE' 
+        // Create custom confirmation modal
+        const confirmModal = document.createElement('div');
+        confirmModal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+        confirmModal.innerHTML = `
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border-2 border-red-500 shadow-2xl max-w-md mx-4 text-center">
+                <div class="text-5xl mb-4">🗑️</div>
+                <h3 class="text-xl font-bold text-white mb-3">Supprimer la transaction</h3>
+                <p class="text-gray-300 mb-6 leading-relaxed">
+                    Êtes-vous sûr de vouloir supprimer cette transaction ? Cette action est irréversible.
+                </p>
+                <div class="flex space-x-4 justify-center">
+                    <button id="confirm-delete" class="px-6 py-3 bg-red-500 hover:bg-red-400 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border border-red-400">
+                        Oui, supprimer
+                    </button>
+                    <button id="cancel-delete" class="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-lg font-semibold transition-all duration-300 border border-gray-500">
+                        Annuler
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(confirmModal);
+        
+        return new Promise((resolve) => {
+            document.getElementById('confirm-delete').addEventListener('click', async () => {
+                confirmModal.remove();
+                
+                try {
+                    const response = await fetch(`${API_URL}/transactions/${id}`, { 
+                        method: 'DELETE' 
+                    });
+                    
+                    if (!response.ok) throw new Error('Failed to delete transaction');
+                    
+                    state.transactions = state.transactions.filter(t => t.id !== id);
+                    renderAll();
+                    showNotification('Transaction supprimée avec succès', 'success');
+                    
+                } catch (error) {
+                    console.error('Error deleting transaction:', error);
+                    showNotification('Erreur lors de la suppression. Réessayez.', 'error');
+                }
+                resolve();
             });
             
-            if (!response.ok) throw new Error('Failed to delete transaction');
+            document.getElementById('cancel-delete').addEventListener('click', () => {
+                confirmModal.remove();
+                resolve();
+            });
             
-            state.transactions = state.transactions.filter(t => t.id !== id);
-            renderAll();
-            showNotification('Transaction deleted successfully', 'success');
-            
-        } catch (error) {
-            console.error('Error deleting transaction:', error);
-            showNotification('Error deleting transaction. Please try again.', 'error');
-        }
+            // Close on backdrop click
+            confirmModal.addEventListener('click', (e) => {
+                if (e.target === confirmModal) {
+                    confirmModal.remove();
+                    resolve();
+                }
+            });
+        });
     };
 
     window.addToGoal = async function(goalId) {
-        const amount = prompt('Enter amount to add to this goal:');
+        const amount = prompt('Montant à ajouter à cet objectif :');
         if (!amount || isNaN(amount) || parseFloat(amount) <= 0) return;
 
         try {
@@ -922,12 +1072,155 @@ document.addEventListener('DOMContentLoaded', () => {
             if (index !== -1) state.goals[index] = updatedGoal;
             
             renderGoals();
-            showNotification(`Added ${formatCurrency(amount)} to goal!`, 'success');
+            showNotification(`${formatCurrency(amount)} ajouté à l'objectif !`, 'success');
             
         } catch (error) {
             console.error('Error updating goal:', error);
-            showNotification('Error updating goal progress', 'error');
+            showNotification('Erreur lors de la mise à jour', 'error');
         }
+    };
+
+    window.editGoal = async function(goalId) {
+        const goal = state.goals.find(g => g.id === goalId);
+        if (!goal) return;
+
+        // Create edit modal
+        const editModal = document.createElement('div');
+        editModal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+        editModal.innerHTML = `
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border-2 border-orange-500 shadow-2xl max-w-md mx-4 w-full">
+                <div class="text-center mb-6">
+                    <div class="text-4xl mb-2">🎯</div>
+                    <h3 class="text-xl font-bold text-white">Modifier l'objectif</h3>
+                </div>
+                <form id="edit-goal-form" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Titre</label>
+                        <input type="text" id="edit-goal-title" value="${goal.title}" 
+                               class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:border-orange-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Montant cible</label>
+                        <input type="number" id="edit-goal-amount" value="${goal.target_amount}" step="0.01" min="0"
+                               class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:border-orange-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Date limite</label>
+                        <input type="date" id="edit-goal-date" value="${goal.target_date ? goal.target_date.split('T')[0] : ''}"
+                               class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:border-orange-500 focus:outline-none">
+                    </div>
+                    <div class="flex space-x-4 pt-4">
+                        <button type="submit" class="flex-1 bg-orange-500 hover:bg-orange-400 text-white py-3 rounded-lg font-semibold transition-all duration-300 border border-orange-400">
+                            Sauvegarder
+                        </button>
+                        <button type="button" id="cancel-edit-goal" class="flex-1 bg-gray-600 hover:bg-gray-500 text-white py-3 rounded-lg font-semibold transition-all border border-gray-500">
+                            Annuler
+                        </button>
+                    </div>
+                </form>
+            </div>
+        `;
+        
+        document.body.appendChild(editModal);
+        document.getElementById('edit-goal-title').focus();
+
+        document.getElementById('edit-goal-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const updatedGoal = {
+                title: document.getElementById('edit-goal-title').value,
+                target_amount: parseFloat(document.getElementById('edit-goal-amount').value),
+                target_date: document.getElementById('edit-goal-date').value,
+                current_amount: goal.current_amount
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/goals/${goalId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedGoal)
+                });
+
+                if (!response.ok) throw new Error('Failed to update goal');
+
+                const saved = await response.json();
+                const index = state.goals.findIndex(g => g.id === goalId);
+                if (index !== -1) state.goals[index] = saved;
+                
+                editModal.remove();
+                renderGoals();
+                showNotification('Objectif modifié avec succès !', 'success');
+                
+            } catch (error) {
+                console.error('Error updating goal:', error);
+                showNotification('Erreur lors de la modification', 'error');
+            }
+        });
+
+        document.getElementById('cancel-edit-goal').addEventListener('click', () => {
+            editModal.remove();
+        });
+
+        editModal.addEventListener('click', (e) => {
+            if (e.target === editModal) editModal.remove();
+        });
+    };
+
+    window.deleteGoal = async function(goalId) {
+        const goal = state.goals.find(g => g.id === goalId);
+        if (!goal) return;
+
+        // Create custom confirmation modal
+        const confirmModal = document.createElement('div');
+        confirmModal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+        confirmModal.innerHTML = `
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border-2 border-red-500 shadow-2xl max-w-md mx-4 text-center">
+                <div class="text-5xl mb-4">🗑️</div>
+                <h3 class="text-xl font-bold text-white mb-3">Supprimer l'objectif</h3>
+                <p class="text-gray-300 mb-2 font-semibold">"${goal.title}"</p>
+                <p class="text-gray-400 mb-6 leading-relaxed text-sm">
+                    Êtes-vous sûr de vouloir supprimer cet objectif ? Cette action est irréversible.
+                </p>
+                <div class="flex space-x-4 justify-center">
+                    <button id="confirm-delete-goal" class="px-6 py-3 bg-red-500 hover:bg-red-400 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 border border-red-400">
+                        Oui, supprimer
+                    </button>
+                    <button id="cancel-delete-goal" class="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-lg font-semibold transition-all duration-300 border border-gray-500">
+                        Annuler
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(confirmModal);
+
+        document.getElementById('confirm-delete-goal').addEventListener('click', async () => {
+            confirmModal.remove();
+            
+            try {
+                const response = await fetch(`${API_URL}/goals/${goalId}`, { 
+                    method: 'DELETE' 
+                });
+                
+                if (!response.ok) throw new Error('Failed to delete goal');
+                
+                state.goals = state.goals.filter(g => g.id !== goalId);
+                renderGoals();
+                showNotification('Objectif supprimé avec succès', 'success');
+                
+            } catch (error) {
+                console.error('Error deleting goal:', error);
+                showNotification('Erreur lors de la suppression', 'error');
+            }
+        });
+        
+        document.getElementById('cancel-delete-goal').addEventListener('click', () => {
+            confirmModal.remove();
+        });
+        
+        confirmModal.addEventListener('click', (e) => {
+            if (e.target === confirmModal) confirmModal.remove();
+        });
     };
 
     // Initialize the application
