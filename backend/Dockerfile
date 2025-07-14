@@ -1,13 +1,16 @@
+
 FROM node:18-alpine
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+# Installer nodemon pour le hot reload
+RUN npm install && npm install --save-dev nodemon
 
 COPY . .
 
 EXPOSE 3001
 
-CMD ["npm", "start"]
+# Utiliser nodemon pour le hot reload
+CMD ["npx", "nodemon", "index.js"]
