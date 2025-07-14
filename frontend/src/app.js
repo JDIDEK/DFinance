@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
         goalModal: document.getElementById('goal-modal'),
         goalForm: document.getElementById('goal-form'),
         liveTime: document.getElementById('live-time'),
-        themeToggle: document.getElementById('theme-toggle')
     };
 
     // Chart instances
@@ -61,9 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('filter-all').addEventListener('click', () => filterTransactions('all'));
         document.getElementById('filter-income').addEventListener('click', () => filterTransactions('income'));
         document.getElementById('filter-expense').addEventListener('click', () => filterTransactions('expense'));
-        
-        // Theme toggle
-        elements.themeToggle.addEventListener('click', toggleTheme);
         
         // Close modal on backdrop click
         elements.goalModal.addEventListener('click', (e) => {
@@ -701,11 +697,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeGoalModal() {
         elements.goalModal.classList.add('hidden');
         elements.goalForm.reset();
-    }
-
-    function toggleTheme() {
-        // This is a placeholder for theme switching functionality
-        showNotification('Theme switching coming soon! 🏁', 'info');
     }
 
     function showLoadingState() {
