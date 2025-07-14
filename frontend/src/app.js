@@ -1055,29 +1055,99 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addToGoal = async function(goalId) {
-        const amount = prompt('Montant à ajouter à cet objectif :');
-        if (!amount || isNaN(amount) || parseFloat(amount) <= 0) return;
+        const goal = state.goals.find(g => g.id === goalId);
+        if (!goal) return;
 
-        try {
-            const response = await fetch(`${API_URL}/goals/${goalId}/progress`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ amount: parseFloat(amount) })
-            });
+        // Créer une modale personnalisée identique au style edit
+        const addFundsModal = document.createElement('div');
+        addFundsModal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+        addFundsModal.innerHTML = `
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border-2 border-orange-500 shadow-2xl max-w-md mx-4 w-full">
+                <div class="text-center mb-6">
+                    <div class="text-4xl mb-2">💰</div>
+                    <h3 class="text-xl font-bold text-white">Ajouter des fonds</h3>
+                    <p class="text-gray-400 text-sm mt-2">${goal.title}</p>
+                </div>
+                <form id="add-funds-form" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Montant à ajouter</label>
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center justify-center text-gray-500 text-lg font-semibold pointer-events-none z-0">
+                                Objectif: ${formatCurrency(goal.target_amount - goal.current_amount)} restants
+                            </div>
+                            <input type="number" id="funds-amount" step="0.01" min="0.01" 
+                            class="w-full p-3 bg-gray-700 bg-opacity-80 border border-gray-600 rounded-lg text-white focus:border-orange-500 focus:outline-none relative z-10 backdrop-blur-sm" 
+                            placeholder="Ex: 100.00">
+                        </div>
+                    </div>
+                    <div class="flex space-x-4 pt-4">
+                        <button type="submit" class="flex-1 bg-lamborghini-orange hover:bg-lamborghini-dark-orange text-white py-3 rounded-lg font-semibold transition-all duration-300 border border-lamborghini-orange">
+                            Ajouter
+                        </button>
+                        <button type="button" id="cancel-add-funds" class="flex-1 bg-gray-600 hover:bg-gray-500 text-white py-3 rounded-lg font-semibold transition-all border border-gray-500">
+                            Annuler
+                        </button>
+                    </div>
+                </form>
+            </div>
+        `;
+        
+        document.body.appendChild(addFundsModal);
+        document.getElementById('funds-amount').focus();
 
-            if (!response.ok) throw new Error('Failed to update goal progress');
-
-            const updatedGoal = await response.json();
-            const index = state.goals.findIndex(g => g.id === goalId);
-            if (index !== -1) state.goals[index] = updatedGoal;
+        // Gérer la soumission du formulaire
+        document.getElementById('add-funds-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
             
-            renderGoals();
-            showNotification(`${formatCurrency(amount)} ajouté à l'objectif !`, 'success');
-            
-        } catch (error) {
-            console.error('Error updating goal:', error);
-            showNotification('Erreur lors de la mise à jour', 'error');
-        }
+            const amount = parseFloat(document.getElementById('funds-amount').value);
+            if (!amount || amount <= 0) {
+                showNotification('Veuillez entrer un montant valide', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/goals/${goalId}/progress`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ amount: amount })
+                });
+
+                if (!response.ok) throw new Error('Failed to update goal progress');
+
+                const updatedGoal = await response.json();
+                const index = state.goals.findIndex(g => g.id === goalId);
+                if (index !== -1) state.goals[index] = updatedGoal;
+                
+                addFundsModal.remove();
+                renderGoals();
+                showNotification(`${formatCurrency(amount)} ajouté à l'objectif`, 'success');
+                
+            } catch (error) {
+                console.error('Error updating goal:', error);
+                showNotification('Erreur lors de la mise à jour', 'error');
+            }
+        });
+
+        // Gérer l'annulation
+        document.getElementById('cancel-add-funds').addEventListener('click', () => {
+            addFundsModal.remove();
+        });
+
+        // Fermer la modale en cliquant à l'extérieur
+        addFundsModal.addEventListener('click', (e) => {
+            if (e.target === addFundsModal) {
+                addFundsModal.remove();
+            }
+        });
+
+        // Fermer avec Escape
+        const handleEscape = (e) => {
+            if (e.key === 'Escape') {
+                addFundsModal.remove();
+                document.removeEventListener('keydown', handleEscape);
+            }
+        };
+        document.addEventListener('keydown', handleEscape);
     };
 
     window.editGoal = async function(goalId) {

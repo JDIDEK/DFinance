@@ -120,13 +120,17 @@
 
                         <div>
                             <label for="description" class="block text-lamborghini-orange text-sm font-semibold mb-2 uppercase tracking-wide">Description</label>
-                            <input type="text" id="description" name="description" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-lamborghini-orange focus:ring-2 focus:ring-lamborghini-orange focus:ring-opacity-50 transition-all" required>
+                            <div class="relative">
+                                <input type="text" id="description" name="description" class="w-full bg-gray-700 bg-opacity-80 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-lamborghini-orange focus:ring-2 focus:ring-lamborghini-orange focus:ring-opacity-50 transition-all backdrop-blur-sm relative z-10" required placeholder="Ex: Courses, Salaire, Restaurant...">
+                            </div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label for="amount" class="block text-lamborghini-orange text-sm font-semibold mb-2 uppercase tracking-wide">Amount</label>
-                                <input type="number" id="amount" name="amount" step="0.01" min="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-lamborghini-orange focus:ring-2 focus:ring-lamborghini-orange focus:ring-opacity-50 transition-all" required>
+                                <div class="relative">
+                                    <input type="number" id="amount" name="amount" step="0.01" min="0.01" class="w-full bg-gray-700 bg-opacity-80 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-lamborghini-orange focus:ring-2 focus:ring-lamborghini-orange focus:ring-opacity-50 transition-all backdrop-blur-sm relative z-10" required placeholder="0.00">
+                                </div>
                             </div>
                             <div>
                                 <label for="date" class="block text-lamborghini-orange text-sm font-semibold mb-2 uppercase tracking-wide">Date</label>
