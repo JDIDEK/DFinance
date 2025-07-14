@@ -61,13 +61,13 @@
 2. **Start with Docker Compose**
    ```bash
    # Stop any existing containers
-   docker-compose down
+   docker compose down
    
    # Build and start services
-   docker-compose up --build -d
+   docker compose up --build -d
    
    # Check services status
-   docker-compose ps
+   docker compose ps
    ```
 
 3. **Access the application**
@@ -114,12 +114,12 @@ If you encounter CORS errors:
 #### Docker Issues
 ```bash
 # Reset everything
-docker-compose down -v
-docker-compose up --build -d
+docker compose down -v
+docker compose up --build -d
 
 # Check logs
-docker-compose logs backend
-docker-compose logs frontend
+docker compose logs backend
+docker compose logs frontend
 ```
 
 ## 🎮 Usage Guide
@@ -245,10 +245,10 @@ services:
 ### Docker Production
 ```bash
 # Build production images
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
 # Scale services
-docker-compose up -d --scale backend=3
+docker compose up -d --scale backend=3
 ```
 
 ### Environment Setup
@@ -273,7 +273,7 @@ npm test
 
 ### Integration Tests
 ```bash
-docker-compose -f docker-compose.test.yml up
+docker compose -f docker-compose.test.yml up
 ```
 
 ## 📈 Performance Optimizations

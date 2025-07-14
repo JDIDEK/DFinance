@@ -4,10 +4,10 @@
   "description": "DFinance - Ultimate Personal Finance Tracker with modern-inspired design",
   "main": "index.js",
   "scripts": {
-    "start": "docker-compose up",
-    "dev": "docker-compose up --build",
-    "stop": "docker-compose down",
-    "clean": "docker-compose down -v",
+    "start": "docker compose up",
+    "dev": "docker compose up --build",
+    "stop": "docker compose down",
+    "clean": "docker compose down -v",
     "backend": "cd backend && npm start",
     "frontend": "cd frontend && npm start",
     "install-deps": "cd backend && npm install && cd ../frontend && npm install"
