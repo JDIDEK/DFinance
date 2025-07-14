@@ -1,5 +1,10 @@
 # 🚀 DFinance - Ultimate Personal Finance Tracker
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![PostgreSQL](https://img.shields.io/badge/postgres-%23316192.svg?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+
 ![DFinance Banner](https://via.placeholder.com/800x200/FF6B00/000000?text=DFINANCE+-+MODERN+FINANCE+TRACKER)
 
 ## 🚀 Overview

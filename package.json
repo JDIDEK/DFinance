@@ -1,0 +1,40 @@
+{
+  "name": "dfinance",
+  "version": "2.0.0",
+  "description": "DFinance - Ultimate Personal Finance Tracker with modern-inspired design",
+  "main": "index.js",
+  "scripts": {
+    "start": "docker-compose up",
+    "dev": "docker-compose up --build",
+    "stop": "docker-compose down",
+    "clean": "docker-compose down -v",
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && npm start",
+    "install-deps": "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JDIDEK/DFinance.git"
+  },
+  "keywords": [
+    "finance",
+    "tracker",
+    "personal-finance",
+    "dashboard",
+    "modern",
+    "docker",
+    "nodejs",
+    "postgres",
+    "tailwind"
+  ],
+  "author": "JDIDEK",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JDIDEK/DFinance/issues"
+  },
+  "homepage": "https://github.com/JDIDEK/DFinance#readme",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}
