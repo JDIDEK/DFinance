@@ -1,0 +1,347 @@
+/* DFinance Pro - Lamborghini-Inspired Styling */
+
+:root {
+    --lamborghini-orange: #FF6B00;
+    --lamborghini-dark-orange: #E55A00;
+    --lamborghini-black: #000000;
+    --lamborghini-dark-gray: #1a1a1a;
+    --lamborghini-gray: #2d2d2d;
+    --lamborghini-light-gray: #404040;
+    --accent-green: #00FF88;
+    --accent-red: #FF3366;
+    --accent-blue: #00AAFF;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+    background-attachment: fixed;
+    color: #ffffff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Lamborghini-style animations */
+@keyframes pulse-orange {
+    0%, 100% { box-shadow: 0 0 5px var(--lamborghini-orange); }
+    50% { box-shadow: 0 0 20px var(--lamborghini-orange), 0 0 30px var(--lamborghini-orange); }
+}
+
+@keyframes slide-in {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fade-in-up {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Chart containers */
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    max-height: 350px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    padding: 20px;
+    border: 1px solid var(--lamborghini-orange);
+}
+
+@media (min-width: 768px) {
+    .chart-container {
+        height: 350px;
+    }
+}
+
+/* Custom scrollbar - Lamborghini style */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--lamborghini-dark-gray);
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--lamborghini-orange), var(--lamborghini-dark-orange));
+    border-radius: 10px;
+    border: 1px solid var(--lamborghini-black);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, var(--lamborghini-dark-orange), var(--lamborghini-orange));
+}
+
+/* Enhanced Button Styles */
+.btn-lamborghini {
+    background: linear-gradient(45deg, var(--lamborghini-orange), var(--lamborghini-dark-orange));
+    color: var(--lamborghini-black);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-lamborghini:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(255, 107, 0, 0.5);
+}
+
+.btn-lamborghini:active {
+    transform: translateY(0);
+}
+
+/* Transaction cards with racing-inspired design */
+.transaction-card {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    border: 1px solid #404040;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.transaction-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--lamborghini-orange), transparent);
+    transition: left 0.5s ease;
+}
+
+.transaction-card:hover::before {
+    left: 100%;
+}
+
+.transaction-card:hover {
+    border-color: var(--lamborghini-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 0, 0.2);
+}
+
+/* Goal progress bars */
+.goal-progress {
+    width: 100%;
+    height: 8px;
+    background: var(--lamborghini-dark-gray);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.goal-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--lamborghini-orange), var(--lamborghini-dark-orange));
+    border-radius: 4px;
+    transition: width 0.8s ease;
+    position: relative;
+}
+
+.goal-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Form styling */
+input, select, textarea {
+    background: var(--lamborghini-gray) !important;
+    border: 2px solid #404040 !important;
+    color: #ffffff !important;
+    transition: all 0.3s ease !important;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--lamborghini-orange) !important;
+    box-shadow: 0 0 10px rgba(255, 107, 0, 0.3) !important;
+    outline: none !important;
+}
+
+/* Live time display */
+#live-time {
+    font-family: 'Orbitron', monospace;
+    font-weight: 600;
+    color: var(--lamborghini-orange);
+    text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+}
+
+/* Status indicators */
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.status-active {
+    background: var(--accent-green);
+    box-shadow: 0 0 10px var(--accent-green);
+    animation: pulse 2s infinite;
+}
+
+.status-warning {
+    background: var(--lamborghini-orange);
+    box-shadow: 0 0 10px var(--lamborghini-orange);
+}
+
+.status-danger {
+    background: var(--accent-red);
+    box-shadow: 0 0 10px var(--accent-red);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Modal styling */
+.modal-backdrop {
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Racing stripes effect */
+.racing-stripes {
+    position: relative;
+    overflow: hidden;
+}
+
+.racing-stripes::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--lamborghini-orange) 0px,
+        var(--lamborghini-orange) 20px,
+        transparent 20px,
+        transparent 40px
+    );
+    animation: racing-stripe 3s linear infinite;
+}
+
+@keyframes racing-stripe {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Typography enhancements */
+.display-font {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.heading-font {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Hover effects for interactive elements */
+.interactive-hover {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.interactive-hover:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* Loading animations */
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #404040;
+    border-top: 4px solid var(--lamborghini-orange);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive design enhancements */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+    }
+    
+    .display-font {
+        font-size: 1.5rem;
+    }
+    
+    .heading-font {
+        font-size: 1.1rem;
+    }
+}
+
+/* Performance optimizations */
+* {
+    will-change: auto;
+}
+
+.animate {
+    will-change: transform, opacity;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus indicators for keyboard navigation */
+button:focus,
+input:focus,
+select:focus {
+    outline: 2px solid var(--lamborghini-orange);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --lamborghini-orange: #FFB000;
+        --lamborghini-black: #000000;
+        --lamborghini-gray: #404040;
+    }
+}

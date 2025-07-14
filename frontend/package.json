@@ -1,0 +1,21 @@
+{
+  "name": "dfinance-frontend",
+  "version": "2.0.0",
+  "description": "DFinance - Advanced Personal Finance Tracker Frontend",
+  "scripts": {
+    "start": "npx http-server . -p 3000 -c-1",
+    "dev": "npx http-server . -p 3000 -c-1",
+    "build": "npx tailwindcss -i ./src/input.css -o ./src/tailwind.css --watch",
+    "build-css": "npx tailwindcss -i ./src/input.css -o ./src/tailwind.css --minify",
+    "install-deps": "npm install -g http-server"
+  },
+  "keywords": ["finance", "tracker", "frontend", "dashboard"],
+  "author": "DFinance Team",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31"
+  }
+}

@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Lamborghini-inspired styles */
+@layer base {
+  :root {
+    --lamborghini-orange: #FF6B00;
+    --lamborghini-dark-orange: #E55A00;
+    --lamborghini-black: #000000;
+    --lamborghini-dark-gray: #1a1a1a;
+    --lamborghini-gray: #2d2d2d;
+    --lamborghini-light-gray: #404040;
+    --accent-green: #00FF88;
+    --accent-red: #FF3366;
+    --accent-blue: #00AAFF;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+    background-attachment: fixed;
+    color: #ffffff;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+}
