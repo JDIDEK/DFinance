@@ -243,21 +243,20 @@ app.get('/analytics/summary', async (req, res) => {
 // Get monthly trends
 app.get('/analytics/trends', async (req, res) => {
   try {
-    const { months = 12 } = req.query;
-    
-    const query = `
-      SELECT 
-        DATE_TRUNC('month', date) as month,
-        type,
-        SUM(amount) as total_amount,
-        COUNT(*) as transaction_count
-      FROM transactions 
-      WHERE date >= CURRENT_DATE - INTERVAL '${months} months'
-      GROUP BY DATE_TRUNC('month', date), type
-      ORDER BY month DESC, type
-    `;
+    const months = parseInt(req.query.months ?? 12, 10);
 
-    const result = await pool.query(query);
+    if (Number.isNaN(months)) {
+      return res.status(400).json({ error: 'Invalid months parameter' });
+    }
+
+    const query = `
+      SELECT DATE_TRUNC('month', date) as month, type,
+             SUM(amount) as total_amount, COUNT(*) as transaction_count
+      FROM transactions
+      WHERE date >= CURRENT_DATE - INTERVAL $1
+      GROUP BY DATE_TRUNC('month', date), type
+      ORDER BY month DESC, type`;
+    const result = await pool.query(query, [`${months} months`]);
     res.json(result.rows);
   } catch (err) {
     console.error('Error fetching trends:', err);
