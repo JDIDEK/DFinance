@@ -29,7 +29,6 @@
 - **JavaScript (ES6+)**: Vanilla JS with modern features
 - **Tailwind CSS**: Utility-first CSS framework
 - **Chart.js**: Beautiful, responsive charts
-- **Google Fonts**: Orbitron & Rajdhani for racing aesthetics
 
 ### Backend
 - **Node.js**: JavaScript runtime environment
