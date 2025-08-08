@@ -77,7 +77,14 @@ app.get('/health', (req, res) => {
 // Get all transactions
 app.get('/transactions', async (req, res) => {
   try {
-    const { limit = 100, offset = 0, type, category, startDate, endDate } = req.query;
+    let { limit = 100, offset = 0, type, category, startDate, endDate } = req.query;
+    // Ensure numeric values for pagination to prevent SQL errors
+    limit = parseInt(limit, 10);
+    offset = parseInt(offset, 10);
+
+    if (isNaN(limit) || limit <= 0) limit = 100;
+    if (isNaN(offset) || offset < 0) offset = 0;
+
     let query = 'SELECT * FROM transactions WHERE 1=1';
     const params = [];
     let paramCount = 0;
@@ -121,8 +128,9 @@ app.get('/transactions', async (req, res) => {
 app.post('/transactions', async (req, res) => {
   try {
     const { type, description, amount, date, category, payment_method = 'cash', notes = '' } = req.body;
-    
-    if (!type || !description || !amount || !date || !category) {
+
+    // Validate required fields explicitly to allow zero amounts
+    if (!type || !description || amount === undefined || amount === null || !date || !category) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
