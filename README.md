@@ -54,8 +54,8 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/dfinance-pro.git
-   cd dfinance-pro
+   git clone https://github.com/yourusername/DFinance.git
+   cd DFinance
    ```
 
 2. **Start with Docker Compose**
@@ -321,8 +321,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/dfinance-pro/issues)
-- **Documentation**: [Wiki](https://github.com/yourusername/dfinance-pro/wiki)
+- **Issues**: [GitHub Issues](https://github.com/yourusername/DFinance/issues)
+- **Documentation**: [Wiki](https://github.com/yourusername/DFinance/wiki)
 - **Email**: support@dfinance.pro
 
 ## 🗺️ Roadmap
