@@ -3,6 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { Pool } = require('pg');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -71,6 +72,26 @@ pool.connect((err, client, release) => {
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
+
+// Authentication routes
+const authRoutes = require('./routes/auth')(pool);
+app.use('/auth', authRoutes);
+
+// JWT authentication middleware
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (!token) return res.status(401).json({ error: 'No token provided' });
+
+  jwt.verify(token, process.env.JWT_SECRET || 'dfinance-secret', (err, user) => {
+    if (err) return res.status(403).json({ error: 'Invalid token' });
+    req.user = user;
+    next();
+  });
+};
+
+// Protect all routes below this middleware
+app.use(authenticateToken);
 
 // TRANSACTIONS ROUTES
 

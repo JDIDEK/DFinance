@@ -16,6 +16,20 @@
     <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </head>
 <body class="bg-gray-900 text-gray-100 min-h-screen">
+    <!-- Authentication Forms -->
+    <div id="auth-forms" class="container mx-auto px-6 py-4">
+        <form id="login-form" class="mb-4 flex space-x-2">
+            <input type="email" id="login-email" placeholder="Email" class="px-2 py-1 text-black rounded" required>
+            <input type="password" id="login-password" placeholder="Password" class="px-2 py-1 text-black rounded" required>
+            <button type="submit" class="bg-orange-500 text-black px-4 py-1 rounded">Login</button>
+        </form>
+        <form id="register-form" class="flex space-x-2">
+            <input type="text" id="register-username" placeholder="Username" class="px-2 py-1 text-black rounded" required>
+            <input type="email" id="register-email" placeholder="Email" class="px-2 py-1 text-black rounded" required>
+            <input type="password" id="register-password" placeholder="Password" class="px-2 py-1 text-black rounded" required>
+            <button type="submit" class="bg-green-500 text-black px-4 py-1 rounded">Register</button>
+        </form>
+    </div>
     <!-- Header with modern design -->
     <header class="bg-gradient-to-r from-black via-gray-900 to-black border-b-2 border-orange-500 shadow-2xl">
         <div class="container mx-auto px-6 py-4">
@@ -251,6 +265,7 @@
         </div>
     </div>
 
+    <script src="src/auth.js"></script>
     <script src="src/app.js"></script>
 </body>
 </html>
