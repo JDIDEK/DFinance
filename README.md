@@ -122,6 +122,15 @@ docker compose logs backend
 docker compose logs frontend
 ```
 
+## Backend Tests
+
+To run the backend test suite:
+
+```bash
+cd backend
+npm test
+```
+
 ## 🎮 Usage Guide
 
 ### Adding Transactions
